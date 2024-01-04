@@ -38,6 +38,9 @@ public class ValueComparer
     private Func<T?, T?, bool>? _equals;
     private Func<T, int>? _hashCode;
     private Func<T, T>? _snapshot;
+    private LambdaExpression? _objectEqualsExpression;
+    private static readonly PropertyInfo StructuralComparisonsStructuralEqualityComparerProperty =
+        typeof(StructuralComparisons).GetProperty(nameof(StructuralComparisons.StructuralEqualityComparer))!;
 
     /// <summary>
     ///     Creates a new <see cref="ValueComparer{T}" /> with a default comparison
@@ -105,7 +108,7 @@ public class ValueComparer
         {
             return Expression.Lambda<Func<T?, T?, bool>>(
                 Expression.Call(
-                    Expression.Constant(StructuralComparisons.StructuralEqualityComparer, typeof(IEqualityComparer)),
+                    Expression.Property(null, StructuralComparisonsStructuralEqualityComparerProperty),
                     EqualityComparerEqualsMethod,
                     Expression.Convert(param1, typeof(object)),
                     Expression.Convert(param2, typeof(object))
@@ -211,7 +214,7 @@ public class ValueComparer
         {
             return Expression.Lambda<Func<T, int>>(
                 Expression.Call(
-                    Expression.Constant(StructuralComparisons.StructuralEqualityComparer, typeof(IEqualityComparer)),
+                    Expression.Property(null, StructuralComparisonsStructuralEqualityComparerProperty),
                     EqualityComparerHashCodeMethod,
                     Expression.Convert(param, typeof(object))
                 ),
@@ -246,6 +249,34 @@ public class ValueComparer
         var v2Null = right == null;
 
         return v1Null || v2Null ? v1Null && v2Null : Equals((T?)left, (T?)right);
+    }
+
+    /// <inheritdoc />
+    public override LambdaExpression ObjectEqualsExpression
+    {
+        get
+        {
+            if (_objectEqualsExpression == null)
+            {
+                var left = Expression.Parameter(typeof(object), "left");
+                var right = Expression.Parameter(typeof(object), "right");
+
+                _objectEqualsExpression = Expression.Lambda<Func<object?, object?, bool>>(
+                    Expression.Condition(
+                        Expression.Equal(left, Expression.Constant(null)),
+                        Expression.Equal(right, Expression.Constant(null)),
+                        Expression.AndAlso(
+                            Expression.NotEqual(right, Expression.Constant(null)),
+                            Expression.Invoke(
+                                EqualsExpression,
+                                Expression.Convert(left, typeof(T)),
+                                Expression.Convert(right, typeof(T))))),
+                    left,
+                    right);
+            }
+
+            return _objectEqualsExpression;
+        }
     }
 
     /// <summary>
