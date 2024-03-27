@@ -9,6 +9,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Editing;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Microsoft.EntityFrameworkCore.Design.Internal;
+using Microsoft.EntityFrameworkCore.Internal;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
 namespace Microsoft.EntityFrameworkCore.Query.Internal;
@@ -127,7 +128,7 @@ public class RuntimeModelLinqToCSharpSyntaxTranslator : LinqToCSharpSyntaxTransl
             {
                 if (assignmentKind is not SyntaxKind.SimpleAssignmentExpression)
                 {
-                    throw new NotSupportedException("Compound assignment not supported");
+                    throw new NotImplementedException("Compound assignment not supported yet.");
                 }
 
                 Result = InvocationExpression(

@@ -34,7 +34,7 @@ namespace TestNamespace
                 discriminatorProperty: "Discriminator",
                 discriminatorValue: "PrincipalBase",
                 derivedTypesCount: 1,
-                propertyCount: 14,
+                propertyCount: 15,
                 complexPropertyCount: 1,
                 navigationCount: 1,
                 foreignKeyCount: 1,
@@ -246,13 +246,57 @@ namespace TestNamespace
                 jsonValueReaderWriter: JsonSignedEnumReaderWriter<CompiledModelTestBase.AFlagsEnum>.Instance);
             flagsEnum1.AddRuntimeAnnotation("UnsafeAccessors", new[] { ("PrincipalBaseEntityType.UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_FlagsEnum1", "TestNamespace") });
 
+            var flagsEnum2 = runtimeEntityType.AddProperty(
+                "FlagsEnum2",
+                typeof(CompiledModelTestBase.AFlagsEnum),
+                propertyInfo: typeof(CompiledModelTestBase.PrincipalBase).GetProperty("FlagsEnum2", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
+                fieldInfo: typeof(CompiledModelTestBase.PrincipalBase).GetField("<FlagsEnum2>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
+                sentinel: (CompiledModelTestBase.AFlagsEnum)0);
+            flagsEnum2.SetGetter(
+                (CompiledModelTestBase.PrincipalBase entity) => UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_FlagsEnum2(entity),
+                (CompiledModelTestBase.PrincipalBase entity) => object.Equals((object)UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_FlagsEnum2(entity), (object)(CompiledModelTestBase.AFlagsEnum)0L),
+                (CompiledModelTestBase.PrincipalBase instance) => UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_FlagsEnum2(instance),
+                (CompiledModelTestBase.PrincipalBase instance) => object.Equals((object)UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_FlagsEnum2(instance), (object)(CompiledModelTestBase.AFlagsEnum)0L));
+            flagsEnum2.SetSetter(
+                (CompiledModelTestBase.PrincipalBase entity, CompiledModelTestBase.AFlagsEnum value) => UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_FlagsEnum2(entity) = value);
+            flagsEnum2.SetMaterializationSetter(
+                (CompiledModelTestBase.PrincipalBase entity, CompiledModelTestBase.AFlagsEnum value) => UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_FlagsEnum2(entity) = value);
+            flagsEnum2.SetAccessors(
+                (InternalEntityEntry entry) => UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_FlagsEnum2((CompiledModelTestBase.PrincipalBase)entry.Entity),
+                (InternalEntityEntry entry) => UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_FlagsEnum2((CompiledModelTestBase.PrincipalBase)entry.Entity),
+                (InternalEntityEntry entry) => entry.ReadOriginalValue<CompiledModelTestBase.AFlagsEnum>(flagsEnum2, 5),
+                (InternalEntityEntry entry) => entry.GetCurrentValue<CompiledModelTestBase.AFlagsEnum>(flagsEnum2),
+                (ValueBuffer valueBuffer) => valueBuffer[5]);
+            flagsEnum2.SetPropertyIndexes(
+                index: 5,
+                originalValueIndex: 5,
+                shadowIndex: -1,
+                relationshipIndex: -1,
+                storeGenerationIndex: -1);
+            flagsEnum2.TypeMapping = InMemoryTypeMapping.Default.Clone(
+                comparer: new ValueComparer<CompiledModelTestBase.AFlagsEnum>(
+                    (CompiledModelTestBase.AFlagsEnum v1, CompiledModelTestBase.AFlagsEnum v2) => object.Equals((object)v1, (object)v2),
+                    (CompiledModelTestBase.AFlagsEnum v) => v.GetHashCode(),
+                    (CompiledModelTestBase.AFlagsEnum v) => v),
+                keyComparer: new ValueComparer<CompiledModelTestBase.AFlagsEnum>(
+                    (CompiledModelTestBase.AFlagsEnum v1, CompiledModelTestBase.AFlagsEnum v2) => object.Equals((object)v1, (object)v2),
+                    (CompiledModelTestBase.AFlagsEnum v) => v.GetHashCode(),
+                    (CompiledModelTestBase.AFlagsEnum v) => v),
+                providerValueComparer: new ValueComparer<CompiledModelTestBase.AFlagsEnum>(
+                    (CompiledModelTestBase.AFlagsEnum v1, CompiledModelTestBase.AFlagsEnum v2) => object.Equals((object)v1, (object)v2),
+                    (CompiledModelTestBase.AFlagsEnum v) => v.GetHashCode(),
+                    (CompiledModelTestBase.AFlagsEnum v) => v),
+                clrType: typeof(CompiledModelTestBase.AFlagsEnum),
+                jsonValueReaderWriter: JsonSignedEnumReaderWriter<CompiledModelTestBase.AFlagsEnum>.Instance);
+            flagsEnum2.AddRuntimeAnnotation("UnsafeAccessors", new[] { ("PrincipalBaseEntityType.UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_FlagsEnum2", "TestNamespace") });
+
             var principalBaseId = runtimeEntityType.AddProperty(
                 "PrincipalBaseId",
                 typeof(long?),
                 nullable: true);
             principalBaseId.SetPropertyIndexes(
-                index: 5,
-                originalValueIndex: 5,
+                index: 6,
+                originalValueIndex: 6,
                 shadowIndex: 1,
                 relationshipIndex: 1,
                 storeGenerationIndex: 1);
@@ -291,12 +335,12 @@ namespace TestNamespace
             refTypeArray.SetAccessors(
                 (InternalEntityEntry entry) => UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_RefTypeArray((CompiledModelTestBase.PrincipalBase)entry.Entity),
                 (InternalEntityEntry entry) => UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_RefTypeArray((CompiledModelTestBase.PrincipalBase)entry.Entity),
-                (InternalEntityEntry entry) => entry.ReadOriginalValue<IPAddress[]>(refTypeArray, 6),
+                (InternalEntityEntry entry) => entry.ReadOriginalValue<IPAddress[]>(refTypeArray, 7),
                 (InternalEntityEntry entry) => entry.GetCurrentValue<IPAddress[]>(refTypeArray),
-                (ValueBuffer valueBuffer) => valueBuffer[6]);
+                (ValueBuffer valueBuffer) => valueBuffer[7]);
             refTypeArray.SetPropertyIndexes(
-                index: 6,
-                originalValueIndex: 6,
+                index: 7,
+                originalValueIndex: 7,
                 shadowIndex: -1,
                 relationshipIndex: -1,
                 storeGenerationIndex: -1);
@@ -366,12 +410,12 @@ namespace TestNamespace
             refTypeEnumerable.SetAccessors(
                 (InternalEntityEntry entry) => UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_RefTypeEnumerable((CompiledModelTestBase.PrincipalBase)entry.Entity),
                 (InternalEntityEntry entry) => UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_RefTypeEnumerable((CompiledModelTestBase.PrincipalBase)entry.Entity),
-                (InternalEntityEntry entry) => entry.ReadOriginalValue<IEnumerable<string>>(refTypeEnumerable, 7),
+                (InternalEntityEntry entry) => entry.ReadOriginalValue<IEnumerable<string>>(refTypeEnumerable, 8),
                 (InternalEntityEntry entry) => entry.GetCurrentValue<IEnumerable<string>>(refTypeEnumerable),
-                (ValueBuffer valueBuffer) => valueBuffer[7]);
+                (ValueBuffer valueBuffer) => valueBuffer[8]);
             refTypeEnumerable.SetPropertyIndexes(
-                index: 7,
-                originalValueIndex: 7,
+                index: 8,
+                originalValueIndex: 8,
                 shadowIndex: -1,
                 relationshipIndex: -1,
                 storeGenerationIndex: -1);
@@ -427,12 +471,12 @@ namespace TestNamespace
             refTypeIList.SetAccessors(
                 (InternalEntityEntry entry) => UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_RefTypeIList((CompiledModelTestBase.PrincipalBase)entry.Entity),
                 (InternalEntityEntry entry) => UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_RefTypeIList((CompiledModelTestBase.PrincipalBase)entry.Entity),
-                (InternalEntityEntry entry) => entry.ReadOriginalValue<IList<string>>(refTypeIList, 8),
+                (InternalEntityEntry entry) => entry.ReadOriginalValue<IList<string>>(refTypeIList, 9),
                 (InternalEntityEntry entry) => entry.GetCurrentValue<IList<string>>(refTypeIList),
-                (ValueBuffer valueBuffer) => valueBuffer[8]);
+                (ValueBuffer valueBuffer) => valueBuffer[9]);
             refTypeIList.SetPropertyIndexes(
-                index: 8,
-                originalValueIndex: 8,
+                index: 9,
+                originalValueIndex: 9,
                 shadowIndex: -1,
                 relationshipIndex: -1,
                 storeGenerationIndex: -1);
@@ -488,12 +532,12 @@ namespace TestNamespace
             refTypeList.SetAccessors(
                 (InternalEntityEntry entry) => UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_RefTypeList((CompiledModelTestBase.PrincipalBase)entry.Entity),
                 (InternalEntityEntry entry) => UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_RefTypeList((CompiledModelTestBase.PrincipalBase)entry.Entity),
-                (InternalEntityEntry entry) => entry.ReadOriginalValue<List<IPAddress>>(refTypeList, 9),
+                (InternalEntityEntry entry) => entry.ReadOriginalValue<List<IPAddress>>(refTypeList, 10),
                 (InternalEntityEntry entry) => entry.GetCurrentValue<List<IPAddress>>(refTypeList),
-                (ValueBuffer valueBuffer) => valueBuffer[9]);
+                (ValueBuffer valueBuffer) => valueBuffer[10]);
             refTypeList.SetPropertyIndexes(
-                index: 9,
-                originalValueIndex: 9,
+                index: 10,
+                originalValueIndex: 10,
                 shadowIndex: -1,
                 relationshipIndex: -1,
                 storeGenerationIndex: -1);
@@ -563,12 +607,12 @@ namespace TestNamespace
             valueTypeArray.SetAccessors(
                 (InternalEntityEntry entry) => UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_ValueTypeArray((CompiledModelTestBase.PrincipalBase)entry.Entity),
                 (InternalEntityEntry entry) => UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_ValueTypeArray((CompiledModelTestBase.PrincipalBase)entry.Entity),
-                (InternalEntityEntry entry) => entry.ReadOriginalValue<DateTime[]>(valueTypeArray, 10),
+                (InternalEntityEntry entry) => entry.ReadOriginalValue<DateTime[]>(valueTypeArray, 11),
                 (InternalEntityEntry entry) => entry.GetCurrentValue<DateTime[]>(valueTypeArray),
-                (ValueBuffer valueBuffer) => valueBuffer[10]);
+                (ValueBuffer valueBuffer) => valueBuffer[11]);
             valueTypeArray.SetPropertyIndexes(
-                index: 10,
-                originalValueIndex: 10,
+                index: 11,
+                originalValueIndex: 11,
                 shadowIndex: -1,
                 relationshipIndex: -1,
                 storeGenerationIndex: -1);
@@ -624,12 +668,12 @@ namespace TestNamespace
             valueTypeEnumerable.SetAccessors(
                 (InternalEntityEntry entry) => UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_ValueTypeEnumerable((CompiledModelTestBase.PrincipalBase)entry.Entity),
                 (InternalEntityEntry entry) => UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_ValueTypeEnumerable((CompiledModelTestBase.PrincipalBase)entry.Entity),
-                (InternalEntityEntry entry) => entry.ReadOriginalValue<IEnumerable<byte>>(valueTypeEnumerable, 11),
+                (InternalEntityEntry entry) => entry.ReadOriginalValue<IEnumerable<byte>>(valueTypeEnumerable, 12),
                 (InternalEntityEntry entry) => entry.GetCurrentValue<IEnumerable<byte>>(valueTypeEnumerable),
-                (ValueBuffer valueBuffer) => valueBuffer[11]);
+                (ValueBuffer valueBuffer) => valueBuffer[12]);
             valueTypeEnumerable.SetPropertyIndexes(
-                index: 11,
-                originalValueIndex: 11,
+                index: 12,
+                originalValueIndex: 12,
                 shadowIndex: -1,
                 relationshipIndex: -1,
                 storeGenerationIndex: -1);
@@ -685,12 +729,12 @@ namespace TestNamespace
             valueTypeIList.SetAccessors(
                 (InternalEntityEntry entry) => UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_ValueTypeIList((CompiledModelTestBase.PrincipalBase)entry.Entity),
                 (InternalEntityEntry entry) => UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_ValueTypeIList((CompiledModelTestBase.PrincipalBase)entry.Entity),
-                (InternalEntityEntry entry) => entry.ReadOriginalValue<IList<byte>>(valueTypeIList, 12),
+                (InternalEntityEntry entry) => entry.ReadOriginalValue<IList<byte>>(valueTypeIList, 13),
                 (InternalEntityEntry entry) => entry.GetCurrentValue<IList<byte>>(valueTypeIList),
-                (ValueBuffer valueBuffer) => valueBuffer[12]);
+                (ValueBuffer valueBuffer) => valueBuffer[13]);
             valueTypeIList.SetPropertyIndexes(
-                index: 12,
-                originalValueIndex: 12,
+                index: 13,
+                originalValueIndex: 13,
                 shadowIndex: -1,
                 relationshipIndex: -1,
                 storeGenerationIndex: -1);
@@ -746,12 +790,12 @@ namespace TestNamespace
             valueTypeList.SetAccessors(
                 (InternalEntityEntry entry) => UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_ValueTypeList((CompiledModelTestBase.PrincipalBase)entry.Entity),
                 (InternalEntityEntry entry) => UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_ValueTypeList((CompiledModelTestBase.PrincipalBase)entry.Entity),
-                (InternalEntityEntry entry) => entry.ReadOriginalValue<List<short>>(valueTypeList, 13),
+                (InternalEntityEntry entry) => entry.ReadOriginalValue<List<short>>(valueTypeList, 14),
                 (InternalEntityEntry entry) => entry.GetCurrentValue<List<short>>(valueTypeList),
-                (ValueBuffer valueBuffer) => valueBuffer[13]);
+                (ValueBuffer valueBuffer) => valueBuffer[14]);
             valueTypeList.SetPropertyIndexes(
-                index: 13,
-                originalValueIndex: 13,
+                index: 14,
+                originalValueIndex: 14,
                 shadowIndex: -1,
                 relationshipIndex: -1,
                 storeGenerationIndex: -1);
@@ -871,14 +915,14 @@ namespace TestNamespace
                         level1.Details = value;
                     });
                 details.SetAccessors(
-                    (InternalEntityEntry entry) => entry.FlaggedAsStoreGenerated(14) ? entry.ReadStoreGeneratedValue<string>(2) : entry.FlaggedAsTemporary(14) && !((UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(string) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity).Details) == null) && (UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(string) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity).Details) == "" ? entry.ReadTemporaryValue<string>(2) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(string) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity).Details,
+                    (InternalEntityEntry entry) => entry.FlaggedAsStoreGenerated(15) ? entry.ReadStoreGeneratedValue<string>(2) : entry.FlaggedAsTemporary(15) && !((UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(string) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity).Details) == null) && (UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(string) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity).Details) == "" ? entry.ReadTemporaryValue<string>(2) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(string) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity).Details,
                     (InternalEntityEntry entry) => UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(string) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity).Details,
-                    (InternalEntityEntry entry) => entry.ReadOriginalValue<string>(details, 14),
+                    (InternalEntityEntry entry) => entry.ReadOriginalValue<string>(details, 15),
                     (InternalEntityEntry entry) => entry.GetCurrentValue<string>(details),
-                    (ValueBuffer valueBuffer) => valueBuffer[14]);
+                    (ValueBuffer valueBuffer) => valueBuffer[15]);
                 details.SetPropertyIndexes(
-                    index: 14,
-                    originalValueIndex: 14,
+                    index: 15,
+                    originalValueIndex: 15,
                     shadowIndex: -1,
                     relationshipIndex: -1,
                     storeGenerationIndex: 2);
@@ -926,12 +970,12 @@ namespace TestNamespace
                 number.SetAccessors(
                     (InternalEntityEntry entry) => UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(int) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Number(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity)),
                     (InternalEntityEntry entry) => UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(int) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Number(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity)),
-                    (InternalEntityEntry entry) => entry.ReadOriginalValue<int>(number, 15),
+                    (InternalEntityEntry entry) => entry.ReadOriginalValue<int>(number, 16),
                     (InternalEntityEntry entry) => entry.GetCurrentValue<int>(number),
-                    (ValueBuffer valueBuffer) => valueBuffer[15]);
+                    (ValueBuffer valueBuffer) => valueBuffer[16]);
                 number.SetPropertyIndexes(
-                    index: 15,
-                    originalValueIndex: 15,
+                    index: 16,
+                    originalValueIndex: 16,
                     shadowIndex: -1,
                     relationshipIndex: -1,
                     storeGenerationIndex: -1);
@@ -978,12 +1022,12 @@ namespace TestNamespace
                 refTypeArray.SetAccessors(
                     (InternalEntityEntry entry) => UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(IPAddress[]) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType__refTypeArray(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity)),
                     (InternalEntityEntry entry) => UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(IPAddress[]) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType__refTypeArray(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity)),
-                    (InternalEntityEntry entry) => entry.ReadOriginalValue<IPAddress[]>(refTypeArray, 16),
+                    (InternalEntityEntry entry) => entry.ReadOriginalValue<IPAddress[]>(refTypeArray, 17),
                     (InternalEntityEntry entry) => entry.GetCurrentValue<IPAddress[]>(refTypeArray),
-                    (ValueBuffer valueBuffer) => valueBuffer[16]);
+                    (ValueBuffer valueBuffer) => valueBuffer[17]);
                 refTypeArray.SetPropertyIndexes(
-                    index: 16,
-                    originalValueIndex: 16,
+                    index: 17,
+                    originalValueIndex: 17,
                     shadowIndex: -1,
                     relationshipIndex: -1,
                     storeGenerationIndex: -1);
@@ -1061,12 +1105,12 @@ namespace TestNamespace
                 refTypeEnumerable.SetAccessors(
                     (InternalEntityEntry entry) => UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(IEnumerable<string>) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType__refTypeEnumerable(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity)),
                     (InternalEntityEntry entry) => UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(IEnumerable<string>) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType__refTypeEnumerable(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity)),
-                    (InternalEntityEntry entry) => entry.ReadOriginalValue<IEnumerable<string>>(refTypeEnumerable, 17),
+                    (InternalEntityEntry entry) => entry.ReadOriginalValue<IEnumerable<string>>(refTypeEnumerable, 18),
                     (InternalEntityEntry entry) => entry.GetCurrentValue<IEnumerable<string>>(refTypeEnumerable),
-                    (ValueBuffer valueBuffer) => valueBuffer[17]);
+                    (ValueBuffer valueBuffer) => valueBuffer[18]);
                 refTypeEnumerable.SetPropertyIndexes(
-                    index: 17,
-                    originalValueIndex: 17,
+                    index: 18,
+                    originalValueIndex: 18,
                     shadowIndex: -1,
                     relationshipIndex: -1,
                     storeGenerationIndex: -1);
@@ -1130,12 +1174,12 @@ namespace TestNamespace
                 refTypeIList.SetAccessors(
                     (InternalEntityEntry entry) => UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(IList<string>) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType__refTypeIList(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity)),
                     (InternalEntityEntry entry) => UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(IList<string>) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType__refTypeIList(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity)),
-                    (InternalEntityEntry entry) => entry.ReadOriginalValue<IList<string>>(refTypeIList, 18),
+                    (InternalEntityEntry entry) => entry.ReadOriginalValue<IList<string>>(refTypeIList, 19),
                     (InternalEntityEntry entry) => entry.GetCurrentValue<IList<string>>(refTypeIList),
-                    (ValueBuffer valueBuffer) => valueBuffer[18]);
+                    (ValueBuffer valueBuffer) => valueBuffer[19]);
                 refTypeIList.SetPropertyIndexes(
-                    index: 18,
-                    originalValueIndex: 18,
+                    index: 19,
+                    originalValueIndex: 19,
                     shadowIndex: -1,
                     relationshipIndex: -1,
                     storeGenerationIndex: -1);
@@ -1199,12 +1243,12 @@ namespace TestNamespace
                 refTypeList.SetAccessors(
                     (InternalEntityEntry entry) => UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(List<IPAddress>) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType__refTypeList(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity)),
                     (InternalEntityEntry entry) => UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(List<IPAddress>) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType__refTypeList(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity)),
-                    (InternalEntityEntry entry) => entry.ReadOriginalValue<List<IPAddress>>(refTypeList, 19),
+                    (InternalEntityEntry entry) => entry.ReadOriginalValue<List<IPAddress>>(refTypeList, 20),
                     (InternalEntityEntry entry) => entry.GetCurrentValue<List<IPAddress>>(refTypeList),
-                    (ValueBuffer valueBuffer) => valueBuffer[19]);
+                    (ValueBuffer valueBuffer) => valueBuffer[20]);
                 refTypeList.SetPropertyIndexes(
-                    index: 19,
-                    originalValueIndex: 19,
+                    index: 20,
+                    originalValueIndex: 20,
                     shadowIndex: -1,
                     relationshipIndex: -1,
                     storeGenerationIndex: -1);
@@ -1282,12 +1326,12 @@ namespace TestNamespace
                 valueTypeArray.SetAccessors(
                     (InternalEntityEntry entry) => UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(DateTime[]) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType__valueTypeArray(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity)),
                     (InternalEntityEntry entry) => UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(DateTime[]) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType__valueTypeArray(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity)),
-                    (InternalEntityEntry entry) => entry.ReadOriginalValue<DateTime[]>(valueTypeArray, 20),
+                    (InternalEntityEntry entry) => entry.ReadOriginalValue<DateTime[]>(valueTypeArray, 21),
                     (InternalEntityEntry entry) => entry.GetCurrentValue<DateTime[]>(valueTypeArray),
-                    (ValueBuffer valueBuffer) => valueBuffer[20]);
+                    (ValueBuffer valueBuffer) => valueBuffer[21]);
                 valueTypeArray.SetPropertyIndexes(
-                    index: 20,
-                    originalValueIndex: 20,
+                    index: 21,
+                    originalValueIndex: 21,
                     shadowIndex: -1,
                     relationshipIndex: -1,
                     storeGenerationIndex: -1);
@@ -1351,12 +1395,12 @@ namespace TestNamespace
                 valueTypeEnumerable.SetAccessors(
                     (InternalEntityEntry entry) => UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(IEnumerable<byte>) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType__valueTypeEnumerable(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity)),
                     (InternalEntityEntry entry) => UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(IEnumerable<byte>) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType__valueTypeEnumerable(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity)),
-                    (InternalEntityEntry entry) => entry.ReadOriginalValue<IEnumerable<byte>>(valueTypeEnumerable, 21),
+                    (InternalEntityEntry entry) => entry.ReadOriginalValue<IEnumerable<byte>>(valueTypeEnumerable, 22),
                     (InternalEntityEntry entry) => entry.GetCurrentValue<IEnumerable<byte>>(valueTypeEnumerable),
-                    (ValueBuffer valueBuffer) => valueBuffer[21]);
+                    (ValueBuffer valueBuffer) => valueBuffer[22]);
                 valueTypeEnumerable.SetPropertyIndexes(
-                    index: 21,
-                    originalValueIndex: 21,
+                    index: 22,
+                    originalValueIndex: 22,
                     shadowIndex: -1,
                     relationshipIndex: -1,
                     storeGenerationIndex: -1);
@@ -1420,12 +1464,12 @@ namespace TestNamespace
                 valueTypeIList.SetAccessors(
                     (InternalEntityEntry entry) => UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(IList<byte>) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_ValueTypeIList(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity)),
                     (InternalEntityEntry entry) => UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(IList<byte>) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_ValueTypeIList(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity)),
-                    (InternalEntityEntry entry) => entry.ReadOriginalValue<IList<byte>>(valueTypeIList, 22),
+                    (InternalEntityEntry entry) => entry.ReadOriginalValue<IList<byte>>(valueTypeIList, 23),
                     (InternalEntityEntry entry) => entry.GetCurrentValue<IList<byte>>(valueTypeIList),
-                    (ValueBuffer valueBuffer) => valueBuffer[22]);
+                    (ValueBuffer valueBuffer) => valueBuffer[23]);
                 valueTypeIList.SetPropertyIndexes(
-                    index: 22,
-                    originalValueIndex: 22,
+                    index: 23,
+                    originalValueIndex: 23,
                     shadowIndex: -1,
                     relationshipIndex: -1,
                     storeGenerationIndex: -1);
@@ -1489,12 +1533,12 @@ namespace TestNamespace
                 valueTypeList.SetAccessors(
                     (InternalEntityEntry entry) => UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(List<short>) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType__valueTypeList(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity)),
                     (InternalEntityEntry entry) => UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(List<short>) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType__valueTypeList(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity)),
-                    (InternalEntityEntry entry) => entry.ReadOriginalValue<List<short>>(valueTypeList, 23),
+                    (InternalEntityEntry entry) => entry.ReadOriginalValue<List<short>>(valueTypeList, 24),
                     (InternalEntityEntry entry) => entry.GetCurrentValue<List<short>>(valueTypeList),
-                    (ValueBuffer valueBuffer) => valueBuffer[23]);
+                    (ValueBuffer valueBuffer) => valueBuffer[24]);
                 valueTypeList.SetPropertyIndexes(
-                    index: 23,
-                    originalValueIndex: 23,
+                    index: 24,
+                    originalValueIndex: 24,
                     shadowIndex: -1,
                     relationshipIndex: -1,
                     storeGenerationIndex: -1);
@@ -1608,12 +1652,12 @@ namespace TestNamespace
                     alternateId.SetAccessors(
                         (InternalEntityEntry entry) => (UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))) == null ? default(Guid) : (UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))).AlternateId,
                         (InternalEntityEntry entry) => (UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))) == null ? default(Guid) : (UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))).AlternateId,
-                        (InternalEntityEntry entry) => entry.ReadOriginalValue<Guid>(alternateId, 24),
+                        (InternalEntityEntry entry) => entry.ReadOriginalValue<Guid>(alternateId, 25),
                         (InternalEntityEntry entry) => entry.GetCurrentValue<Guid>(alternateId),
-                        (ValueBuffer valueBuffer) => valueBuffer[24]);
+                        (ValueBuffer valueBuffer) => valueBuffer[25]);
                     alternateId.SetPropertyIndexes(
-                        index: 24,
-                        originalValueIndex: 24,
+                        index: 25,
+                        originalValueIndex: 25,
                         shadowIndex: -1,
                         relationshipIndex: -1,
                         storeGenerationIndex: -1);
@@ -1661,12 +1705,12 @@ namespace TestNamespace
                     enum1.SetAccessors(
                         (InternalEntityEntry entry) => (UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))) == null ? default(CompiledModelTestBase.AnEnum) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_Enum1(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))),
                         (InternalEntityEntry entry) => (UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))) == null ? default(CompiledModelTestBase.AnEnum) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_Enum1(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))),
-                        (InternalEntityEntry entry) => entry.ReadOriginalValue<CompiledModelTestBase.AnEnum>(enum1, 25),
+                        (InternalEntityEntry entry) => entry.ReadOriginalValue<CompiledModelTestBase.AnEnum>(enum1, 26),
                         (InternalEntityEntry entry) => entry.GetCurrentValue<CompiledModelTestBase.AnEnum>(enum1),
-                        (ValueBuffer valueBuffer) => valueBuffer[25]);
+                        (ValueBuffer valueBuffer) => valueBuffer[26]);
                     enum1.SetPropertyIndexes(
-                        index: 25,
-                        originalValueIndex: 25,
+                        index: 26,
+                        originalValueIndex: 26,
                         shadowIndex: -1,
                         relationshipIndex: -1,
                         storeGenerationIndex: -1);
@@ -1715,12 +1759,12 @@ namespace TestNamespace
                     enum2.SetAccessors(
                         (InternalEntityEntry entry) => (UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))) == null ? default(Nullable<CompiledModelTestBase.AnEnum>) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_Enum2(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))),
                         (InternalEntityEntry entry) => (UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))) == null ? default(Nullable<CompiledModelTestBase.AnEnum>) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_Enum2(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))),
-                        (InternalEntityEntry entry) => entry.ReadOriginalValue<Nullable<CompiledModelTestBase.AnEnum>>(enum2, 26),
+                        (InternalEntityEntry entry) => entry.ReadOriginalValue<Nullable<CompiledModelTestBase.AnEnum>>(enum2, 27),
                         (InternalEntityEntry entry) => entry.GetCurrentValue<Nullable<CompiledModelTestBase.AnEnum>>(enum2),
-                        (ValueBuffer valueBuffer) => valueBuffer[26]);
+                        (ValueBuffer valueBuffer) => valueBuffer[27]);
                     enum2.SetPropertyIndexes(
-                        index: 26,
-                        originalValueIndex: 26,
+                        index: 27,
+                        originalValueIndex: 27,
                         shadowIndex: -1,
                         relationshipIndex: -1,
                         storeGenerationIndex: -1);
@@ -1769,12 +1813,12 @@ namespace TestNamespace
                     flagsEnum1.SetAccessors(
                         (InternalEntityEntry entry) => (UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))) == null ? default(CompiledModelTestBase.AFlagsEnum) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_FlagsEnum1(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))),
                         (InternalEntityEntry entry) => (UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))) == null ? default(CompiledModelTestBase.AFlagsEnum) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_FlagsEnum1(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))),
-                        (InternalEntityEntry entry) => entry.ReadOriginalValue<CompiledModelTestBase.AFlagsEnum>(flagsEnum1, 27),
+                        (InternalEntityEntry entry) => entry.ReadOriginalValue<CompiledModelTestBase.AFlagsEnum>(flagsEnum1, 28),
                         (InternalEntityEntry entry) => entry.GetCurrentValue<CompiledModelTestBase.AFlagsEnum>(flagsEnum1),
-                        (ValueBuffer valueBuffer) => valueBuffer[27]);
+                        (ValueBuffer valueBuffer) => valueBuffer[28]);
                     flagsEnum1.SetPropertyIndexes(
-                        index: 27,
-                        originalValueIndex: 27,
+                        index: 28,
+                        originalValueIndex: 28,
                         shadowIndex: -1,
                         relationshipIndex: -1,
                         storeGenerationIndex: -1);
@@ -1823,12 +1867,12 @@ namespace TestNamespace
                     flagsEnum2.SetAccessors(
                         (InternalEntityEntry entry) => (UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))) == null ? default(CompiledModelTestBase.AFlagsEnum) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_FlagsEnum2(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))),
                         (InternalEntityEntry entry) => (UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))) == null ? default(CompiledModelTestBase.AFlagsEnum) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_FlagsEnum2(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))),
-                        (InternalEntityEntry entry) => entry.ReadOriginalValue<CompiledModelTestBase.AFlagsEnum>(flagsEnum2, 28),
+                        (InternalEntityEntry entry) => entry.ReadOriginalValue<CompiledModelTestBase.AFlagsEnum>(flagsEnum2, 29),
                         (InternalEntityEntry entry) => entry.GetCurrentValue<CompiledModelTestBase.AFlagsEnum>(flagsEnum2),
-                        (ValueBuffer valueBuffer) => valueBuffer[28]);
+                        (ValueBuffer valueBuffer) => valueBuffer[29]);
                     flagsEnum2.SetPropertyIndexes(
-                        index: 28,
-                        originalValueIndex: 28,
+                        index: 29,
+                        originalValueIndex: 29,
                         shadowIndex: -1,
                         relationshipIndex: -1,
                         storeGenerationIndex: -1);
@@ -1877,12 +1921,12 @@ namespace TestNamespace
                     id.SetAccessors(
                         (InternalEntityEntry entry) => (UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))) == null ? default(Nullable<long>) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_Id(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))),
                         (InternalEntityEntry entry) => (UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))) == null ? default(Nullable<long>) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_Id(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))),
-                        (InternalEntityEntry entry) => entry.ReadOriginalValue<Nullable<long>>(id, 29),
+                        (InternalEntityEntry entry) => entry.ReadOriginalValue<Nullable<long>>(id, 30),
                         (InternalEntityEntry entry) => entry.GetCurrentValue<Nullable<long>>(id),
-                        (ValueBuffer valueBuffer) => valueBuffer[29]);
+                        (ValueBuffer valueBuffer) => valueBuffer[30]);
                     id.SetPropertyIndexes(
-                        index: 29,
-                        originalValueIndex: 29,
+                        index: 30,
+                        originalValueIndex: 30,
                         shadowIndex: -1,
                         relationshipIndex: -1,
                         storeGenerationIndex: -1);
@@ -1931,12 +1975,12 @@ namespace TestNamespace
                     refTypeArray.SetAccessors(
                         (InternalEntityEntry entry) => (UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))) == null ? default(IPAddress[]) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_RefTypeArray(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))),
                         (InternalEntityEntry entry) => (UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))) == null ? default(IPAddress[]) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_RefTypeArray(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))),
-                        (InternalEntityEntry entry) => entry.ReadOriginalValue<IPAddress[]>(refTypeArray, 30),
+                        (InternalEntityEntry entry) => entry.ReadOriginalValue<IPAddress[]>(refTypeArray, 31),
                         (InternalEntityEntry entry) => entry.GetCurrentValue<IPAddress[]>(refTypeArray),
-                        (ValueBuffer valueBuffer) => valueBuffer[30]);
+                        (ValueBuffer valueBuffer) => valueBuffer[31]);
                     refTypeArray.SetPropertyIndexes(
-                        index: 30,
-                        originalValueIndex: 30,
+                        index: 31,
+                        originalValueIndex: 31,
                         shadowIndex: -1,
                         relationshipIndex: -1,
                         storeGenerationIndex: -1);
@@ -2016,12 +2060,12 @@ namespace TestNamespace
                     refTypeEnumerable.SetAccessors(
                         (InternalEntityEntry entry) => (UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))) == null ? default(IEnumerable<string>) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_RefTypeEnumerable(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))),
                         (InternalEntityEntry entry) => (UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))) == null ? default(IEnumerable<string>) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_RefTypeEnumerable(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))),
-                        (InternalEntityEntry entry) => entry.ReadOriginalValue<IEnumerable<string>>(refTypeEnumerable, 31),
+                        (InternalEntityEntry entry) => entry.ReadOriginalValue<IEnumerable<string>>(refTypeEnumerable, 32),
                         (InternalEntityEntry entry) => entry.GetCurrentValue<IEnumerable<string>>(refTypeEnumerable),
-                        (ValueBuffer valueBuffer) => valueBuffer[31]);
+                        (ValueBuffer valueBuffer) => valueBuffer[32]);
                     refTypeEnumerable.SetPropertyIndexes(
-                        index: 31,
-                        originalValueIndex: 31,
+                        index: 32,
+                        originalValueIndex: 32,
                         shadowIndex: -1,
                         relationshipIndex: -1,
                         storeGenerationIndex: -1);
@@ -2087,12 +2131,12 @@ namespace TestNamespace
                     refTypeIList.SetAccessors(
                         (InternalEntityEntry entry) => (UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))) == null ? default(IList<string>) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_RefTypeIList(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))),
                         (InternalEntityEntry entry) => (UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))) == null ? default(IList<string>) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_RefTypeIList(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))),
-                        (InternalEntityEntry entry) => entry.ReadOriginalValue<IList<string>>(refTypeIList, 32),
+                        (InternalEntityEntry entry) => entry.ReadOriginalValue<IList<string>>(refTypeIList, 33),
                         (InternalEntityEntry entry) => entry.GetCurrentValue<IList<string>>(refTypeIList),
-                        (ValueBuffer valueBuffer) => valueBuffer[32]);
+                        (ValueBuffer valueBuffer) => valueBuffer[33]);
                     refTypeIList.SetPropertyIndexes(
-                        index: 32,
-                        originalValueIndex: 32,
+                        index: 33,
+                        originalValueIndex: 33,
                         shadowIndex: -1,
                         relationshipIndex: -1,
                         storeGenerationIndex: -1);
@@ -2158,12 +2202,12 @@ namespace TestNamespace
                     refTypeList.SetAccessors(
                         (InternalEntityEntry entry) => (UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))) == null ? default(List<IPAddress>) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_RefTypeList(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))),
                         (InternalEntityEntry entry) => (UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))) == null ? default(List<IPAddress>) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_RefTypeList(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))),
-                        (InternalEntityEntry entry) => entry.ReadOriginalValue<List<IPAddress>>(refTypeList, 33),
+                        (InternalEntityEntry entry) => entry.ReadOriginalValue<List<IPAddress>>(refTypeList, 34),
                         (InternalEntityEntry entry) => entry.GetCurrentValue<List<IPAddress>>(refTypeList),
-                        (ValueBuffer valueBuffer) => valueBuffer[33]);
+                        (ValueBuffer valueBuffer) => valueBuffer[34]);
                     refTypeList.SetPropertyIndexes(
-                        index: 33,
-                        originalValueIndex: 33,
+                        index: 34,
+                        originalValueIndex: 34,
                         shadowIndex: -1,
                         relationshipIndex: -1,
                         storeGenerationIndex: -1);
@@ -2243,12 +2287,12 @@ namespace TestNamespace
                     valueTypeArray.SetAccessors(
                         (InternalEntityEntry entry) => (UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))) == null ? default(DateTime[]) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_ValueTypeArray(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))),
                         (InternalEntityEntry entry) => (UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))) == null ? default(DateTime[]) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_ValueTypeArray(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))),
-                        (InternalEntityEntry entry) => entry.ReadOriginalValue<DateTime[]>(valueTypeArray, 34),
+                        (InternalEntityEntry entry) => entry.ReadOriginalValue<DateTime[]>(valueTypeArray, 35),
                         (InternalEntityEntry entry) => entry.GetCurrentValue<DateTime[]>(valueTypeArray),
-                        (ValueBuffer valueBuffer) => valueBuffer[34]);
+                        (ValueBuffer valueBuffer) => valueBuffer[35]);
                     valueTypeArray.SetPropertyIndexes(
-                        index: 34,
-                        originalValueIndex: 34,
+                        index: 35,
+                        originalValueIndex: 35,
                         shadowIndex: -1,
                         relationshipIndex: -1,
                         storeGenerationIndex: -1);
@@ -2314,12 +2358,12 @@ namespace TestNamespace
                     valueTypeEnumerable.SetAccessors(
                         (InternalEntityEntry entry) => (UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))) == null ? default(IEnumerable<byte>) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_ValueTypeEnumerable(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))),
                         (InternalEntityEntry entry) => (UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))) == null ? default(IEnumerable<byte>) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_ValueTypeEnumerable(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))),
-                        (InternalEntityEntry entry) => entry.ReadOriginalValue<IEnumerable<byte>>(valueTypeEnumerable, 35),
+                        (InternalEntityEntry entry) => entry.ReadOriginalValue<IEnumerable<byte>>(valueTypeEnumerable, 36),
                         (InternalEntityEntry entry) => entry.GetCurrentValue<IEnumerable<byte>>(valueTypeEnumerable),
-                        (ValueBuffer valueBuffer) => valueBuffer[35]);
+                        (ValueBuffer valueBuffer) => valueBuffer[36]);
                     valueTypeEnumerable.SetPropertyIndexes(
-                        index: 35,
-                        originalValueIndex: 35,
+                        index: 36,
+                        originalValueIndex: 36,
                         shadowIndex: -1,
                         relationshipIndex: -1,
                         storeGenerationIndex: -1);
@@ -2385,12 +2429,12 @@ namespace TestNamespace
                     valueTypeIList.SetAccessors(
                         (InternalEntityEntry entry) => (UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))) == null ? default(IList<byte>) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_ValueTypeIList(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))),
                         (InternalEntityEntry entry) => (UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))) == null ? default(IList<byte>) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_ValueTypeIList(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))),
-                        (InternalEntityEntry entry) => entry.ReadOriginalValue<IList<byte>>(valueTypeIList, 36),
+                        (InternalEntityEntry entry) => entry.ReadOriginalValue<IList<byte>>(valueTypeIList, 37),
                         (InternalEntityEntry entry) => entry.GetCurrentValue<IList<byte>>(valueTypeIList),
-                        (ValueBuffer valueBuffer) => valueBuffer[36]);
+                        (ValueBuffer valueBuffer) => valueBuffer[37]);
                     valueTypeIList.SetPropertyIndexes(
-                        index: 36,
-                        originalValueIndex: 36,
+                        index: 37,
+                        originalValueIndex: 37,
                         shadowIndex: -1,
                         relationshipIndex: -1,
                         storeGenerationIndex: -1);
@@ -2456,12 +2500,12 @@ namespace TestNamespace
                     valueTypeList.SetAccessors(
                         (InternalEntityEntry entry) => (UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))) == null ? default(List<short>) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_ValueTypeList(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))),
                         (InternalEntityEntry entry) => (UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))) == null ? default(List<short>) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_ValueTypeList(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity) == null ? default(CompiledModelTestBase.PrincipalBase) : UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_OwnedType_Principal(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase__ownedField((CompiledModelTestBase.PrincipalBase)entry.Entity))),
-                        (InternalEntityEntry entry) => entry.ReadOriginalValue<List<short>>(valueTypeList, 37),
+                        (InternalEntityEntry entry) => entry.ReadOriginalValue<List<short>>(valueTypeList, 38),
                         (InternalEntityEntry entry) => entry.GetCurrentValue<List<short>>(valueTypeList),
-                        (ValueBuffer valueBuffer) => valueBuffer[37]);
+                        (ValueBuffer valueBuffer) => valueBuffer[38]);
                     valueTypeList.SetPropertyIndexes(
-                        index: 37,
-                        originalValueIndex: 37,
+                        index: 38,
+                        originalValueIndex: 38,
                         shadowIndex: -1,
                         relationshipIndex: -1,
                         storeGenerationIndex: -1);
@@ -2630,6 +2674,7 @@ namespace TestNamespace
             var enum1 = runtimeEntityType.FindProperty("Enum1")!;
             var enum2 = runtimeEntityType.FindProperty("Enum2")!;
             var flagsEnum1 = runtimeEntityType.FindProperty("FlagsEnum1")!;
+            var flagsEnum2 = runtimeEntityType.FindProperty("FlagsEnum2")!;
             var principalBaseId = runtimeEntityType.FindProperty("PrincipalBaseId")!;
             var refTypeArray = runtimeEntityType.FindProperty("RefTypeArray")!;
             var refTypeEnumerable = runtimeEntityType.FindProperty("RefTypeEnumerable")!;
@@ -2657,7 +2702,7 @@ namespace TestNamespace
             var enum10 = principalBase.FindProperty("Enum1")!;
             var enum20 = principalBase.FindProperty("Enum2")!;
             var flagsEnum10 = principalBase.FindProperty("FlagsEnum1")!;
-            var flagsEnum2 = principalBase.FindProperty("FlagsEnum2")!;
+            var flagsEnum20 = principalBase.FindProperty("FlagsEnum2")!;
             var id0 = principalBase.FindProperty("Id")!;
             var refTypeArray1 = principalBase.FindProperty("RefTypeArray")!;
             var refTypeEnumerable1 = principalBase.FindProperty("RefTypeEnumerable")!;
@@ -2672,9 +2717,9 @@ namespace TestNamespace
                 (InternalEntityEntry source) =>
                 {
                     var entity = (CompiledModelTestBase.PrincipalBase)source.Entity;
-                    var liftedArg = (ISnapshot)new Snapshot<Nullable<long>, string, CompiledModelTestBase.AnEnum, Nullable<CompiledModelTestBase.AnEnum>, CompiledModelTestBase.AFlagsEnum, Nullable<long>, IPAddress[], IEnumerable<string>, IList<string>, List<IPAddress>, DateTime[], IEnumerable<byte>, IList<byte>, List<short>, string, int, IPAddress[], IEnumerable<string>, IList<string>, List<IPAddress>, DateTime[], IEnumerable<byte>, IList<byte>, List<short>, Guid, CompiledModelTestBase.AnEnum, Nullable<CompiledModelTestBase.AnEnum>, CompiledModelTestBase.AFlagsEnum, CompiledModelTestBase.AFlagsEnum, Nullable<long>>(source.GetCurrentValue<Nullable<long>>(id) == null ? null : ((ValueComparer<Nullable<long>>)id.GetValueComparer()).Snapshot(source.GetCurrentValue<Nullable<long>>(id)), source.GetCurrentValue<string>(discriminator) == null ? null : ((ValueComparer<string>)discriminator.GetValueComparer()).Snapshot(source.GetCurrentValue<string>(discriminator)), ((ValueComparer<CompiledModelTestBase.AnEnum>)enum1.GetValueComparer()).Snapshot(source.GetCurrentValue<CompiledModelTestBase.AnEnum>(enum1)), source.GetCurrentValue<Nullable<CompiledModelTestBase.AnEnum>>(enum2) == null ? null : ((ValueComparer<Nullable<CompiledModelTestBase.AnEnum>>)enum2.GetValueComparer()).Snapshot(source.GetCurrentValue<Nullable<CompiledModelTestBase.AnEnum>>(enum2)), ((ValueComparer<CompiledModelTestBase.AFlagsEnum>)flagsEnum1.GetValueComparer()).Snapshot(source.GetCurrentValue<CompiledModelTestBase.AFlagsEnum>(flagsEnum1)), source.GetCurrentValue<Nullable<long>>(principalBaseId) == null ? null : ((ValueComparer<Nullable<long>>)principalBaseId.GetValueComparer()).Snapshot(source.GetCurrentValue<Nullable<long>>(principalBaseId)), (IEnumerable<IPAddress>)source.GetCurrentValue<IPAddress[]>(refTypeArray) == null ? null : (IPAddress[])((ValueComparer<IEnumerable<IPAddress>>)refTypeArray.GetValueComparer()).Snapshot((IEnumerable<IPAddress>)source.GetCurrentValue<IPAddress[]>(refTypeArray)), source.GetCurrentValue<IEnumerable<string>>(refTypeEnumerable) == null ? null : ((ValueComparer<IEnumerable<string>>)refTypeEnumerable.GetValueComparer()).Snapshot(source.GetCurrentValue<IEnumerable<string>>(refTypeEnumerable)), (IEnumerable<string>)source.GetCurrentValue<IList<string>>(refTypeIList) == null ? null : (IList<string>)((ValueComparer<IEnumerable<string>>)refTypeIList.GetValueComparer()).Snapshot((IEnumerable<string>)source.GetCurrentValue<IList<string>>(refTypeIList)), (IEnumerable<IPAddress>)source.GetCurrentValue<List<IPAddress>>(refTypeList) == null ? null : (List<IPAddress>)((ValueComparer<IEnumerable<IPAddress>>)refTypeList.GetValueComparer()).Snapshot((IEnumerable<IPAddress>)source.GetCurrentValue<List<IPAddress>>(refTypeList)), (IEnumerable<DateTime>)source.GetCurrentValue<DateTime[]>(valueTypeArray) == null ? null : (DateTime[])((ValueComparer<IEnumerable<DateTime>>)valueTypeArray.GetValueComparer()).Snapshot((IEnumerable<DateTime>)source.GetCurrentValue<DateTime[]>(valueTypeArray)), source.GetCurrentValue<IEnumerable<byte>>(valueTypeEnumerable) == null ? null : ((ValueComparer<IEnumerable<byte>>)valueTypeEnumerable.GetValueComparer()).Snapshot(source.GetCurrentValue<IEnumerable<byte>>(valueTypeEnumerable)), (IEnumerable<byte>)source.GetCurrentValue<IList<byte>>(valueTypeIList) == null ? null : (IList<byte>)((ValueComparer<IEnumerable<byte>>)valueTypeIList.GetValueComparer()).Snapshot((IEnumerable<byte>)source.GetCurrentValue<IList<byte>>(valueTypeIList)), (IEnumerable<short>)source.GetCurrentValue<List<short>>(valueTypeList) == null ? null : (List<short>)((ValueComparer<IEnumerable<short>>)valueTypeList.GetValueComparer()).Snapshot((IEnumerable<short>)source.GetCurrentValue<List<short>>(valueTypeList)), source.GetCurrentValue<string>(details) == null ? null : ((ValueComparer<string>)details.GetValueComparer()).Snapshot(source.GetCurrentValue<string>(details)), ((ValueComparer<int>)number.GetValueComparer()).Snapshot(source.GetCurrentValue<int>(number)), (IEnumerable<IPAddress>)source.GetCurrentValue<IPAddress[]>(refTypeArray0) == null ? null : (IPAddress[])((ValueComparer<IEnumerable<IPAddress>>)refTypeArray0.GetValueComparer()).Snapshot((IEnumerable<IPAddress>)source.GetCurrentValue<IPAddress[]>(refTypeArray0)), source.GetCurrentValue<IEnumerable<string>>(refTypeEnumerable0) == null ? null : ((ValueComparer<IEnumerable<string>>)refTypeEnumerable0.GetValueComparer()).Snapshot(source.GetCurrentValue<IEnumerable<string>>(refTypeEnumerable0)), (IEnumerable<string>)source.GetCurrentValue<IList<string>>(refTypeIList0) == null ? null : (IList<string>)((ValueComparer<IEnumerable<string>>)refTypeIList0.GetValueComparer()).Snapshot((IEnumerable<string>)source.GetCurrentValue<IList<string>>(refTypeIList0)), (IEnumerable<IPAddress>)source.GetCurrentValue<List<IPAddress>>(refTypeList0) == null ? null : (List<IPAddress>)((ValueComparer<IEnumerable<IPAddress>>)refTypeList0.GetValueComparer()).Snapshot((IEnumerable<IPAddress>)source.GetCurrentValue<List<IPAddress>>(refTypeList0)), (IEnumerable<DateTime>)source.GetCurrentValue<DateTime[]>(valueTypeArray0) == null ? null : (DateTime[])((ValueComparer<IEnumerable<DateTime>>)valueTypeArray0.GetValueComparer()).Snapshot((IEnumerable<DateTime>)source.GetCurrentValue<DateTime[]>(valueTypeArray0)), source.GetCurrentValue<IEnumerable<byte>>(valueTypeEnumerable0) == null ? null : ((ValueComparer<IEnumerable<byte>>)valueTypeEnumerable0.GetValueComparer()).Snapshot(source.GetCurrentValue<IEnumerable<byte>>(valueTypeEnumerable0)), (IEnumerable<byte>)source.GetCurrentValue<IList<byte>>(valueTypeIList0) == null ? null : (IList<byte>)((ValueComparer<IEnumerable<byte>>)valueTypeIList0.GetValueComparer()).Snapshot((IEnumerable<byte>)source.GetCurrentValue<IList<byte>>(valueTypeIList0)), (IEnumerable<short>)source.GetCurrentValue<List<short>>(valueTypeList0) == null ? null : (List<short>)((ValueComparer<IEnumerable<short>>)valueTypeList0.GetValueComparer()).Snapshot((IEnumerable<short>)source.GetCurrentValue<List<short>>(valueTypeList0)), ((ValueComparer<Guid>)alternateId.GetValueComparer()).Snapshot(source.GetCurrentValue<Guid>(alternateId)), ((ValueComparer<CompiledModelTestBase.AnEnum>)enum10.GetValueComparer()).Snapshot(source.GetCurrentValue<CompiledModelTestBase.AnEnum>(enum10)), source.GetCurrentValue<Nullable<CompiledModelTestBase.AnEnum>>(enum20) == null ? null : ((ValueComparer<Nullable<CompiledModelTestBase.AnEnum>>)enum20.GetValueComparer()).Snapshot(source.GetCurrentValue<Nullable<CompiledModelTestBase.AnEnum>>(enum20)), ((ValueComparer<CompiledModelTestBase.AFlagsEnum>)flagsEnum10.GetValueComparer()).Snapshot(source.GetCurrentValue<CompiledModelTestBase.AFlagsEnum>(flagsEnum10)), ((ValueComparer<CompiledModelTestBase.AFlagsEnum>)flagsEnum2.GetValueComparer()).Snapshot(source.GetCurrentValue<CompiledModelTestBase.AFlagsEnum>(flagsEnum2)), source.GetCurrentValue<Nullable<long>>(id0) == null ? null : ((ValueComparer<Nullable<long>>)id0.GetValueComparer()).Snapshot(source.GetCurrentValue<Nullable<long>>(id0)));
+                    var liftedArg = (ISnapshot)new Snapshot<Nullable<long>, string, CompiledModelTestBase.AnEnum, Nullable<CompiledModelTestBase.AnEnum>, CompiledModelTestBase.AFlagsEnum, CompiledModelTestBase.AFlagsEnum, Nullable<long>, IPAddress[], IEnumerable<string>, IList<string>, List<IPAddress>, DateTime[], IEnumerable<byte>, IList<byte>, List<short>, string, int, IPAddress[], IEnumerable<string>, IList<string>, List<IPAddress>, DateTime[], IEnumerable<byte>, IList<byte>, List<short>, Guid, CompiledModelTestBase.AnEnum, Nullable<CompiledModelTestBase.AnEnum>, CompiledModelTestBase.AFlagsEnum, CompiledModelTestBase.AFlagsEnum>(source.GetCurrentValue<Nullable<long>>(id) == null ? null : ((ValueComparer<Nullable<long>>)id.GetValueComparer()).Snapshot(source.GetCurrentValue<Nullable<long>>(id)), source.GetCurrentValue<string>(discriminator) == null ? null : ((ValueComparer<string>)discriminator.GetValueComparer()).Snapshot(source.GetCurrentValue<string>(discriminator)), ((ValueComparer<CompiledModelTestBase.AnEnum>)enum1.GetValueComparer()).Snapshot(source.GetCurrentValue<CompiledModelTestBase.AnEnum>(enum1)), source.GetCurrentValue<Nullable<CompiledModelTestBase.AnEnum>>(enum2) == null ? null : ((ValueComparer<Nullable<CompiledModelTestBase.AnEnum>>)enum2.GetValueComparer()).Snapshot(source.GetCurrentValue<Nullable<CompiledModelTestBase.AnEnum>>(enum2)), ((ValueComparer<CompiledModelTestBase.AFlagsEnum>)flagsEnum1.GetValueComparer()).Snapshot(source.GetCurrentValue<CompiledModelTestBase.AFlagsEnum>(flagsEnum1)), ((ValueComparer<CompiledModelTestBase.AFlagsEnum>)flagsEnum2.GetValueComparer()).Snapshot(source.GetCurrentValue<CompiledModelTestBase.AFlagsEnum>(flagsEnum2)), source.GetCurrentValue<Nullable<long>>(principalBaseId) == null ? null : ((ValueComparer<Nullable<long>>)principalBaseId.GetValueComparer()).Snapshot(source.GetCurrentValue<Nullable<long>>(principalBaseId)), (IEnumerable<IPAddress>)source.GetCurrentValue<IPAddress[]>(refTypeArray) == null ? null : (IPAddress[])((ValueComparer<IEnumerable<IPAddress>>)refTypeArray.GetValueComparer()).Snapshot((IEnumerable<IPAddress>)source.GetCurrentValue<IPAddress[]>(refTypeArray)), source.GetCurrentValue<IEnumerable<string>>(refTypeEnumerable) == null ? null : ((ValueComparer<IEnumerable<string>>)refTypeEnumerable.GetValueComparer()).Snapshot(source.GetCurrentValue<IEnumerable<string>>(refTypeEnumerable)), (IEnumerable<string>)source.GetCurrentValue<IList<string>>(refTypeIList) == null ? null : (IList<string>)((ValueComparer<IEnumerable<string>>)refTypeIList.GetValueComparer()).Snapshot((IEnumerable<string>)source.GetCurrentValue<IList<string>>(refTypeIList)), (IEnumerable<IPAddress>)source.GetCurrentValue<List<IPAddress>>(refTypeList) == null ? null : (List<IPAddress>)((ValueComparer<IEnumerable<IPAddress>>)refTypeList.GetValueComparer()).Snapshot((IEnumerable<IPAddress>)source.GetCurrentValue<List<IPAddress>>(refTypeList)), (IEnumerable<DateTime>)source.GetCurrentValue<DateTime[]>(valueTypeArray) == null ? null : (DateTime[])((ValueComparer<IEnumerable<DateTime>>)valueTypeArray.GetValueComparer()).Snapshot((IEnumerable<DateTime>)source.GetCurrentValue<DateTime[]>(valueTypeArray)), source.GetCurrentValue<IEnumerable<byte>>(valueTypeEnumerable) == null ? null : ((ValueComparer<IEnumerable<byte>>)valueTypeEnumerable.GetValueComparer()).Snapshot(source.GetCurrentValue<IEnumerable<byte>>(valueTypeEnumerable)), (IEnumerable<byte>)source.GetCurrentValue<IList<byte>>(valueTypeIList) == null ? null : (IList<byte>)((ValueComparer<IEnumerable<byte>>)valueTypeIList.GetValueComparer()).Snapshot((IEnumerable<byte>)source.GetCurrentValue<IList<byte>>(valueTypeIList)), (IEnumerable<short>)source.GetCurrentValue<List<short>>(valueTypeList) == null ? null : (List<short>)((ValueComparer<IEnumerable<short>>)valueTypeList.GetValueComparer()).Snapshot((IEnumerable<short>)source.GetCurrentValue<List<short>>(valueTypeList)), source.GetCurrentValue<string>(details) == null ? null : ((ValueComparer<string>)details.GetValueComparer()).Snapshot(source.GetCurrentValue<string>(details)), ((ValueComparer<int>)number.GetValueComparer()).Snapshot(source.GetCurrentValue<int>(number)), (IEnumerable<IPAddress>)source.GetCurrentValue<IPAddress[]>(refTypeArray0) == null ? null : (IPAddress[])((ValueComparer<IEnumerable<IPAddress>>)refTypeArray0.GetValueComparer()).Snapshot((IEnumerable<IPAddress>)source.GetCurrentValue<IPAddress[]>(refTypeArray0)), source.GetCurrentValue<IEnumerable<string>>(refTypeEnumerable0) == null ? null : ((ValueComparer<IEnumerable<string>>)refTypeEnumerable0.GetValueComparer()).Snapshot(source.GetCurrentValue<IEnumerable<string>>(refTypeEnumerable0)), (IEnumerable<string>)source.GetCurrentValue<IList<string>>(refTypeIList0) == null ? null : (IList<string>)((ValueComparer<IEnumerable<string>>)refTypeIList0.GetValueComparer()).Snapshot((IEnumerable<string>)source.GetCurrentValue<IList<string>>(refTypeIList0)), (IEnumerable<IPAddress>)source.GetCurrentValue<List<IPAddress>>(refTypeList0) == null ? null : (List<IPAddress>)((ValueComparer<IEnumerable<IPAddress>>)refTypeList0.GetValueComparer()).Snapshot((IEnumerable<IPAddress>)source.GetCurrentValue<List<IPAddress>>(refTypeList0)), (IEnumerable<DateTime>)source.GetCurrentValue<DateTime[]>(valueTypeArray0) == null ? null : (DateTime[])((ValueComparer<IEnumerable<DateTime>>)valueTypeArray0.GetValueComparer()).Snapshot((IEnumerable<DateTime>)source.GetCurrentValue<DateTime[]>(valueTypeArray0)), source.GetCurrentValue<IEnumerable<byte>>(valueTypeEnumerable0) == null ? null : ((ValueComparer<IEnumerable<byte>>)valueTypeEnumerable0.GetValueComparer()).Snapshot(source.GetCurrentValue<IEnumerable<byte>>(valueTypeEnumerable0)), (IEnumerable<byte>)source.GetCurrentValue<IList<byte>>(valueTypeIList0) == null ? null : (IList<byte>)((ValueComparer<IEnumerable<byte>>)valueTypeIList0.GetValueComparer()).Snapshot((IEnumerable<byte>)source.GetCurrentValue<IList<byte>>(valueTypeIList0)), (IEnumerable<short>)source.GetCurrentValue<List<short>>(valueTypeList0) == null ? null : (List<short>)((ValueComparer<IEnumerable<short>>)valueTypeList0.GetValueComparer()).Snapshot((IEnumerable<short>)source.GetCurrentValue<List<short>>(valueTypeList0)), ((ValueComparer<Guid>)alternateId.GetValueComparer()).Snapshot(source.GetCurrentValue<Guid>(alternateId)), ((ValueComparer<CompiledModelTestBase.AnEnum>)enum10.GetValueComparer()).Snapshot(source.GetCurrentValue<CompiledModelTestBase.AnEnum>(enum10)), source.GetCurrentValue<Nullable<CompiledModelTestBase.AnEnum>>(enum20) == null ? null : ((ValueComparer<Nullable<CompiledModelTestBase.AnEnum>>)enum20.GetValueComparer()).Snapshot(source.GetCurrentValue<Nullable<CompiledModelTestBase.AnEnum>>(enum20)), ((ValueComparer<CompiledModelTestBase.AFlagsEnum>)flagsEnum10.GetValueComparer()).Snapshot(source.GetCurrentValue<CompiledModelTestBase.AFlagsEnum>(flagsEnum10)), ((ValueComparer<CompiledModelTestBase.AFlagsEnum>)flagsEnum20.GetValueComparer()).Snapshot(source.GetCurrentValue<CompiledModelTestBase.AFlagsEnum>(flagsEnum20)));
                     var entity0 = (CompiledModelTestBase.PrincipalBase)source.Entity;
-                    return (ISnapshot)new MultiSnapshot(new ISnapshot[] { liftedArg, (ISnapshot)new Snapshot<IPAddress[], IEnumerable<string>, IList<string>, List<IPAddress>, DateTime[], IEnumerable<byte>, IList<byte>, List<short>>((IEnumerable<IPAddress>)source.GetCurrentValue<IPAddress[]>(refTypeArray1) == null ? null : (IPAddress[])((ValueComparer<IEnumerable<IPAddress>>)refTypeArray1.GetValueComparer()).Snapshot((IEnumerable<IPAddress>)source.GetCurrentValue<IPAddress[]>(refTypeArray1)), source.GetCurrentValue<IEnumerable<string>>(refTypeEnumerable1) == null ? null : ((ValueComparer<IEnumerable<string>>)refTypeEnumerable1.GetValueComparer()).Snapshot(source.GetCurrentValue<IEnumerable<string>>(refTypeEnumerable1)), (IEnumerable<string>)source.GetCurrentValue<IList<string>>(refTypeIList1) == null ? null : (IList<string>)((ValueComparer<IEnumerable<string>>)refTypeIList1.GetValueComparer()).Snapshot((IEnumerable<string>)source.GetCurrentValue<IList<string>>(refTypeIList1)), (IEnumerable<IPAddress>)source.GetCurrentValue<List<IPAddress>>(refTypeList1) == null ? null : (List<IPAddress>)((ValueComparer<IEnumerable<IPAddress>>)refTypeList1.GetValueComparer()).Snapshot((IEnumerable<IPAddress>)source.GetCurrentValue<List<IPAddress>>(refTypeList1)), (IEnumerable<DateTime>)source.GetCurrentValue<DateTime[]>(valueTypeArray1) == null ? null : (DateTime[])((ValueComparer<IEnumerable<DateTime>>)valueTypeArray1.GetValueComparer()).Snapshot((IEnumerable<DateTime>)source.GetCurrentValue<DateTime[]>(valueTypeArray1)), source.GetCurrentValue<IEnumerable<byte>>(valueTypeEnumerable1) == null ? null : ((ValueComparer<IEnumerable<byte>>)valueTypeEnumerable1.GetValueComparer()).Snapshot(source.GetCurrentValue<IEnumerable<byte>>(valueTypeEnumerable1)), (IEnumerable<byte>)source.GetCurrentValue<IList<byte>>(valueTypeIList1) == null ? null : (IList<byte>)((ValueComparer<IEnumerable<byte>>)valueTypeIList1.GetValueComparer()).Snapshot((IEnumerable<byte>)source.GetCurrentValue<IList<byte>>(valueTypeIList1)), (IEnumerable<short>)source.GetCurrentValue<List<short>>(valueTypeList1) == null ? null : (List<short>)((ValueComparer<IEnumerable<short>>)valueTypeList1.GetValueComparer()).Snapshot((IEnumerable<short>)source.GetCurrentValue<List<short>>(valueTypeList1))) });
+                    return (ISnapshot)new MultiSnapshot(new ISnapshot[] { liftedArg, (ISnapshot)new Snapshot<Nullable<long>, IPAddress[], IEnumerable<string>, IList<string>, List<IPAddress>, DateTime[], IEnumerable<byte>, IList<byte>, List<short>>(source.GetCurrentValue<Nullable<long>>(id0) == null ? null : ((ValueComparer<Nullable<long>>)id0.GetValueComparer()).Snapshot(source.GetCurrentValue<Nullable<long>>(id0)), (IEnumerable<IPAddress>)source.GetCurrentValue<IPAddress[]>(refTypeArray1) == null ? null : (IPAddress[])((ValueComparer<IEnumerable<IPAddress>>)refTypeArray1.GetValueComparer()).Snapshot((IEnumerable<IPAddress>)source.GetCurrentValue<IPAddress[]>(refTypeArray1)), source.GetCurrentValue<IEnumerable<string>>(refTypeEnumerable1) == null ? null : ((ValueComparer<IEnumerable<string>>)refTypeEnumerable1.GetValueComparer()).Snapshot(source.GetCurrentValue<IEnumerable<string>>(refTypeEnumerable1)), (IEnumerable<string>)source.GetCurrentValue<IList<string>>(refTypeIList1) == null ? null : (IList<string>)((ValueComparer<IEnumerable<string>>)refTypeIList1.GetValueComparer()).Snapshot((IEnumerable<string>)source.GetCurrentValue<IList<string>>(refTypeIList1)), (IEnumerable<IPAddress>)source.GetCurrentValue<List<IPAddress>>(refTypeList1) == null ? null : (List<IPAddress>)((ValueComparer<IEnumerable<IPAddress>>)refTypeList1.GetValueComparer()).Snapshot((IEnumerable<IPAddress>)source.GetCurrentValue<List<IPAddress>>(refTypeList1)), (IEnumerable<DateTime>)source.GetCurrentValue<DateTime[]>(valueTypeArray1) == null ? null : (DateTime[])((ValueComparer<IEnumerable<DateTime>>)valueTypeArray1.GetValueComparer()).Snapshot((IEnumerable<DateTime>)source.GetCurrentValue<DateTime[]>(valueTypeArray1)), source.GetCurrentValue<IEnumerable<byte>>(valueTypeEnumerable1) == null ? null : ((ValueComparer<IEnumerable<byte>>)valueTypeEnumerable1.GetValueComparer()).Snapshot(source.GetCurrentValue<IEnumerable<byte>>(valueTypeEnumerable1)), (IEnumerable<byte>)source.GetCurrentValue<IList<byte>>(valueTypeIList1) == null ? null : (IList<byte>)((ValueComparer<IEnumerable<byte>>)valueTypeIList1.GetValueComparer()).Snapshot((IEnumerable<byte>)source.GetCurrentValue<IList<byte>>(valueTypeIList1)), (IEnumerable<short>)source.GetCurrentValue<List<short>>(valueTypeList1) == null ? null : (List<short>)((ValueComparer<IEnumerable<short>>)valueTypeList1.GetValueComparer()).Snapshot((IEnumerable<short>)source.GetCurrentValue<List<short>>(valueTypeList1))) });
                 });
             runtimeEntityType.SetStoreGeneratedValuesFactory(
                 () => (ISnapshot)new Snapshot<Nullable<long>, Nullable<long>, string>(default(Nullable<long>) == null ? null : ((ValueComparer<Nullable<long>>)id.GetValueComparer()).Snapshot(default(Nullable<long>)), default(Nullable<long>) == null ? null : ((ValueComparer<Nullable<long>>)principalBaseId.GetValueComparer()).Snapshot(default(Nullable<long>)), default(string) == null ? null : ((ValueComparer<string>)details.GetValueComparer()).Snapshot(default(string))));
@@ -2691,10 +2736,10 @@ namespace TestNamespace
                     return (ISnapshot)new Snapshot<Nullable<long>, Nullable<long>, object>(source.GetCurrentValue<Nullable<long>>(id) == null ? null : ((ValueComparer<Nullable<long>>)id.GetKeyValueComparer()).Snapshot(source.GetCurrentValue<Nullable<long>>(id)), source.GetCurrentValue<Nullable<long>>(principalBaseId) == null ? null : ((ValueComparer<Nullable<long>>)principalBaseId.GetKeyValueComparer()).Snapshot(source.GetCurrentValue<Nullable<long>>(principalBaseId)), SnapshotFactoryFactory.SnapshotCollection(UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_Deriveds(entity)));
                 });
             runtimeEntityType.Counts = new PropertyCounts(
-                propertyCount: 38,
+                propertyCount: 39,
                 navigationCount: 1,
                 complexPropertyCount: 2,
-                originalValueCount: 38,
+                originalValueCount: 39,
                 shadowCount: 2,
                 relationshipCount: 3,
                 storeGeneratedCount: 3);
@@ -2715,6 +2760,9 @@ namespace TestNamespace
 
         [UnsafeAccessor(UnsafeAccessorKind.Field, Name = "<FlagsEnum1>k__BackingField")]
         public static extern ref CompiledModelTestBase.AFlagsEnum UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_FlagsEnum1(CompiledModelTestBase.PrincipalBase @this);
+
+        [UnsafeAccessor(UnsafeAccessorKind.Field, Name = "<FlagsEnum2>k__BackingField")]
+        public static extern ref CompiledModelTestBase.AFlagsEnum UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_FlagsEnum2(CompiledModelTestBase.PrincipalBase @this);
 
         [UnsafeAccessor(UnsafeAccessorKind.Field, Name = "<RefTypeArray>k__BackingField")]
         public static extern ref IPAddress[] UnsafeAccessor_Microsoft_EntityFrameworkCore_Scaffolding_PrincipalBase_RefTypeArray(CompiledModelTestBase.PrincipalBase @this);

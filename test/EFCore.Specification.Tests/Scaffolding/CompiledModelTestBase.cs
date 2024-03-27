@@ -607,6 +607,9 @@ namespace TestNamespace
             eb =>
             {
                 eb.Ignore(e => e.Owned);
+
+                eb.Property("FlagsEnum2");
+
                 eb.ComplexProperty(
                     e => e.Owned, eb =>
                     {
