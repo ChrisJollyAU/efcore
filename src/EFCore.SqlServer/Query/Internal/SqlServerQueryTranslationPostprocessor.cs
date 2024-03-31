@@ -5,6 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore.Query.Internal;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using Microsoft.EntityFrameworkCore.SqlServer.Internal;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 
@@ -19,6 +20,7 @@ public class SqlServerQueryTranslationPostprocessor : RelationalQueryTranslation
     private readonly SqlServerJsonPostprocessor _jsonPostprocessor;
     private readonly SkipWithoutOrderByInSplitQueryVerifier _skipWithoutOrderByInSplitQueryVerifier = new();
     private readonly SqlServerSqlTreePruner _pruner = new();
+    private readonly SqlServerLiftOrderByPostprocessor _liftOrderByPostprocessor;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -34,6 +36,7 @@ public class SqlServerQueryTranslationPostprocessor : RelationalQueryTranslation
         : base(dependencies, relationalDependencies, queryCompilationContext)
     {
         _jsonPostprocessor = new SqlServerJsonPostprocessor(typeMappingSource, relationalDependencies.SqlExpressionFactory);
+        _liftOrderByPostprocessor = new SqlServerLiftOrderByPostprocessor(typeMappingSource, relationalDependencies.SqlExpressionFactory);
     }
 
     /// <summary>
@@ -48,7 +51,7 @@ public class SqlServerQueryTranslationPostprocessor : RelationalQueryTranslation
 
         var query2 = _jsonPostprocessor.Process(query1);
         _skipWithoutOrderByInSplitQueryVerifier.Visit(query2);
-
+        query2 = _liftOrderByPostprocessor.Process(query2);
         return query2;
     }
 

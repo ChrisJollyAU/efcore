@@ -2879,9 +2879,12 @@ SELECT DISTINCT [c1].[CustomerID], [c1].[Address], [c1].[City], [c1].[CompanyNam
 FROM (
     SELECT [c0].[CustomerID], [c0].[Address], [c0].[City], [c0].[CompanyName], [c0].[ContactName], [c0].[ContactTitle], [c0].[Country], [c0].[Fax], [c0].[Phone], [c0].[PostalCode], [c0].[Region]
     FROM (
-        SELECT TOP(@__p_0) [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region], COALESCE([c].[Region], N'ZZ') AS [c]
-        FROM [Customers] AS [c]
-        ORDER BY COALESCE([c].[Region], N'ZZ')
+        SELECT TOP(@__p_0) [c2].[CustomerID], [c2].[Address], [c2].[City], [c2].[CompanyName], [c2].[ContactName], [c2].[ContactTitle], [c2].[Country], [c2].[Fax], [c2].[Phone], [c2].[PostalCode], [c2].[Region], [c2].[c]
+        FROM (
+            SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region], COALESCE([c].[Region], N'ZZ') AS [c]
+            FROM [Customers] AS [c]
+        ) AS [c2]
+        ORDER BY [c2].[c]
     ) AS [c0]
     ORDER BY [c0].[c]
     OFFSET @__p_1 ROWS
@@ -2890,14 +2893,22 @@ FROM (
     }
 
     public override async Task Select_take_null_coalesce_operator(bool async)
-        => await base.Select_take_null_coalesce_operator(async);
+    {
+        await base.Select_take_null_coalesce_operator(async);
 
-    // issue #16038
-    //            AssertSql(
-    //                @"@__p_0='5'
-    //SELECT TOP(@__p_0) [c].[CustomerID], [c].[CompanyName], COALESCE([c].[Region], N'ZZ') AS [Region]
-    //FROM [Customers] AS [c]
-    //ORDER BY [Region]");
+        AssertSql(
+            """
+@__p_0='5'
+
+SELECT TOP(@__p_0) [c0].[CustomerID], [c0].[CompanyName], [c0].[Region]
+FROM (
+    SELECT [c].[CustomerID], [c].[CompanyName], COALESCE([c].[Region], N'ZZ') AS [Region]
+    FROM [Customers] AS [c]
+) AS [c0]
+ORDER BY [c0].[Region]
+""");
+    }
+
     public override async Task Select_take_skip_null_coalesce_operator(bool async)
     {
         await base.Select_take_skip_null_coalesce_operator(async);
@@ -2909,9 +2920,12 @@ FROM (
 
 SELECT [c0].[CustomerID], [c0].[CompanyName], COALESCE([c0].[Region], N'ZZ') AS [Region]
 FROM (
-    SELECT TOP(@__p_0) [c].[CustomerID], [c].[CompanyName], [c].[Region], COALESCE([c].[Region], N'ZZ') AS [c]
-    FROM [Customers] AS [c]
-    ORDER BY COALESCE([c].[Region], N'ZZ')
+    SELECT TOP(@__p_0) [c1].[CustomerID], [c1].[CompanyName], [c1].[Region], [c1].[c]
+    FROM (
+        SELECT [c].[CustomerID], [c].[CompanyName], [c].[Region], COALESCE([c].[Region], N'ZZ') AS [c]
+        FROM [Customers] AS [c]
+    ) AS [c1]
+    ORDER BY [c1].[c]
 ) AS [c0]
 ORDER BY [c0].[c]
 OFFSET @__p_1 ROWS
@@ -2929,9 +2943,12 @@ OFFSET @__p_1 ROWS
 
 SELECT [c0].[CustomerID], [c0].[CompanyName], [c0].[Region]
 FROM (
-    SELECT TOP(@__p_0) [c].[CustomerID], [c].[CompanyName], [c].[Region], COALESCE([c].[Region], N'ZZ') AS [c]
-    FROM [Customers] AS [c]
-    ORDER BY COALESCE([c].[Region], N'ZZ')
+    SELECT TOP(@__p_0) [c1].[CustomerID], [c1].[CompanyName], [c1].[Region], [c1].[c]
+    FROM (
+        SELECT [c].[CustomerID], [c].[CompanyName], [c].[Region], COALESCE([c].[Region], N'ZZ') AS [c]
+        FROM [Customers] AS [c]
+    ) AS [c1]
+    ORDER BY [c1].[c]
 ) AS [c0]
 ORDER BY [c0].[c]
 OFFSET @__p_1 ROWS
@@ -2949,9 +2966,12 @@ OFFSET @__p_1 ROWS
 
 SELECT [c0].[CustomerID], [c0].[Address], [c0].[City], [c0].[CompanyName], [c0].[ContactName], [c0].[ContactTitle], [c0].[Country], [c0].[Fax], [c0].[Phone], [c0].[PostalCode], [c0].[Region]
 FROM (
-    SELECT TOP(@__p_0) [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region], COALESCE([c].[Region], N'ZZ') AS [c]
-    FROM [Customers] AS [c]
-    ORDER BY COALESCE([c].[Region], N'ZZ')
+    SELECT TOP(@__p_0) [c1].[CustomerID], [c1].[Address], [c1].[City], [c1].[CompanyName], [c1].[ContactName], [c1].[ContactTitle], [c1].[Country], [c1].[Fax], [c1].[Phone], [c1].[PostalCode], [c1].[Region], [c1].[c]
+    FROM (
+        SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region], COALESCE([c].[Region], N'ZZ') AS [c]
+        FROM [Customers] AS [c]
+    ) AS [c1]
+    ORDER BY [c1].[c]
 ) AS [c0]
 ORDER BY [c0].[c]
 OFFSET @__p_1 ROWS
@@ -4201,9 +4221,12 @@ FROM (
 
         AssertSql(
             """
-SELECT [c].[CustomerID] + COALESCE([c].[City], N'') AS [A]
-FROM [Customers] AS [c]
-ORDER BY [c].[CustomerID] + COALESCE([c].[City], N'')
+SELECT [c0].[A]
+FROM (
+    SELECT [c].[CustomerID] + COALESCE([c].[City], N'') AS [A], [c].[CustomerID]
+    FROM [Customers] AS [c]
+) AS [c0]
+ORDER BY [c0].[A]
 """);
     }
 

@@ -6841,9 +6841,12 @@ END, [w].[Id]
 
         AssertSql(
             """
-SELECT [w].[Id] + 2 AS [Binary]
-FROM [Weapons] AS [w]
-ORDER BY [w].[Id] + 2
+SELECT [w0].[Binary]
+FROM (
+    SELECT [w].[Id] + 2 AS [Binary], [w].[Id]
+    FROM [Weapons] AS [w]
+) AS [w0]
+ORDER BY [w0].[Binary]
 """);
     }
 

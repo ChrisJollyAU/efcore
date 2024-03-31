@@ -1329,9 +1329,12 @@ ORDER BY [p].[Id], [d0].[c]
 SELECT [p].[Id], [n0].[value], [n0].[key]
 FROM [PrimitiveCollectionsEntity] AS [p]
 OUTER APPLY (
-    SELECT TOP(20) CAST([n].[value] AS int) AS [value], [n].[key], CAST([n].[key] AS int) AS [c]
-    FROM OPENJSON([p].[NullableInts]) AS [n]
-    ORDER BY CAST([n].[key] AS int)
+    SELECT TOP(20) [n3].[value], [n3].[key], [n3].[c]
+    FROM (
+        SELECT CAST([n].[value] AS int) AS [value], [n].[key], CAST([n].[key] AS int) AS [c]
+        FROM OPENJSON([p].[NullableInts]) AS [n]
+    ) AS [n3]
+    ORDER BY [n3].[c]
 ) AS [n0]
 ORDER BY [p].[Id], [n0].[c]
 """);
@@ -1364,9 +1367,12 @@ ORDER BY [p].[Id], [n0].[value]
 SELECT [p].[Id], [n0].[value], [n0].[key]
 FROM [PrimitiveCollectionsEntity] AS [p]
 OUTER APPLY (
-    SELECT CAST([n].[value] AS int) AS [value], [n].[key], CAST([n].[key] AS int) AS [c]
-    FROM OPENJSON([p].[NullableInts]) AS [n]
-    ORDER BY CAST([n].[key] AS int)
+    SELECT [n3].[value], [n3].[key], [n3].[c]
+    FROM (
+        SELECT CAST([n].[value] AS int) AS [value], [n].[key], CAST([n].[key] AS int) AS [c]
+        FROM OPENJSON([p].[NullableInts]) AS [n]
+    ) AS [n3]
+    ORDER BY [n3].[c]
     OFFSET 2 ROWS
 ) AS [n0]
 ORDER BY [p].[Id], [n0].[c]
@@ -1441,21 +1447,24 @@ ORDER BY [p].[Id], [n1].[c], [n1].[key], [n2].[c]
 
         AssertSql(
             """
-SELECT [p].[Id], CAST([i].[value] AS int) AS [value], [i].[key], CAST([i0].[value] AS int) AS [value], [i0].[key], [d1].[value], [d1].[key], [d2].[value], [d2].[key]
-FROM [PrimitiveCollectionsEntity] AS [p]
-OUTER APPLY OPENJSON([p].[Ints]) AS [i]
-OUTER APPLY OPENJSON([p].[Ints]) AS [i0]
-OUTER APPLY (
-    SELECT CAST([d].[value] AS datetime2) AS [value], [d].[key], CAST([d].[key] AS int) AS [c]
-    FROM OPENJSON([p].[DateTimes]) AS [d]
-    WHERE DATEPART(day, CAST([d].[value] AS datetime2)) <> 1
-) AS [d1]
-OUTER APPLY (
-    SELECT CAST([d0].[value] AS datetime2) AS [value], [d0].[key], CAST([d0].[key] AS int) AS [c]
-    FROM OPENJSON([p].[DateTimes]) AS [d0]
-    WHERE CAST([d0].[value] AS datetime2) > '2000-01-01T00:00:00.0000000'
-) AS [d2]
-ORDER BY [p].[Id], CAST([i].[key] AS int), [i].[key], CAST([i0].[value] AS int) DESC, [i0].[key], [d1].[c], [d1].[key], [d2].[c]
+SELECT [s].[Id], [s].[value], [s].[key], [s].[value0], [s].[key0], [s].[value1], [s].[key1], [s].[value2], [s].[key2]
+FROM (
+    SELECT [p].[Id], CAST([i].[value] AS int) AS [value], [i].[key], CAST([i0].[value] AS int) AS [value0], [i0].[key] AS [key0], [d1].[value] AS [value1], [d1].[key] AS [key1], [d2].[value] AS [value2], [d2].[key] AS [key2]
+    FROM [PrimitiveCollectionsEntity] AS [p]
+    OUTER APPLY OPENJSON([p].[Ints]) AS [i]
+    OUTER APPLY OPENJSON([p].[Ints]) AS [i0]
+    OUTER APPLY (
+        SELECT CAST([d].[value] AS datetime2) AS [value], [d].[key], CAST([d].[key] AS int) AS [c]
+        FROM OPENJSON([p].[DateTimes]) AS [d]
+        WHERE DATEPART(day, CAST([d].[value] AS datetime2)) <> 1
+    ) AS [d1]
+    OUTER APPLY (
+        SELECT CAST([d0].[value] AS datetime2) AS [value], [d0].[key], CAST([d0].[key] AS int) AS [c]
+        FROM OPENJSON([p].[DateTimes]) AS [d0]
+        WHERE CAST([d0].[value] AS datetime2) > '2000-01-01T00:00:00.0000000'
+    ) AS [d2]
+) AS [s]
+ORDER BY [s].[Id], [s].[key], [s].[value0] DESC, [s].[key0], [s].[key1]
 """);
     }
 

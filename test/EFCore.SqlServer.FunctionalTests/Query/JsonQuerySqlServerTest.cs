@@ -1044,9 +1044,12 @@ FROM [JsonEntitiesBasic] AS [j]
 WHERE (
     SELECT [o0].[c]
     FROM (
-        SELECT JSON_VALUE([o].[value], '$.OwnedReferenceLeaf.SomethingSomething') AS [c], CAST([o].[key] AS int) AS [c0]
-        FROM OPENJSON([j].[OwnedReferenceRoot], '$.OwnedCollectionBranch') AS [o]
-        ORDER BY CAST([o].[key] AS int)
+        SELECT [o1].[c], [o1].[c0]
+        FROM (
+            SELECT JSON_VALUE([o].[value], '$.OwnedReferenceLeaf.SomethingSomething') AS [c], CAST([o].[key] AS int) AS [c0]
+            FROM OPENJSON([j].[OwnedReferenceRoot], '$.OwnedCollectionBranch') AS [o]
+        ) AS [o1]
+        ORDER BY [o1].[c0]
         OFFSET 1 ROWS
     ) AS [o0]
     ORDER BY [o0].[c0]
@@ -1065,14 +1068,17 @@ FROM [JsonEntitiesBasic] AS [j]
 WHERE (
     SELECT [o0].[c]
     FROM (
-        SELECT JSON_VALUE([o].[OwnedReferenceLeaf], '$.SomethingSomething') AS [c], [o].[Date] AS [c0]
-        FROM OPENJSON([j].[OwnedReferenceRoot], '$.OwnedCollectionBranch') WITH (
-            [Date] datetime2 '$.Date',
-            [Enum] int '$.Enum',
-            [Fraction] decimal(18,2) '$.Fraction',
-            [OwnedReferenceLeaf] nvarchar(max) '$.OwnedReferenceLeaf' AS JSON
-        ) AS [o]
-        ORDER BY [o].[Date] DESC
+        SELECT [o1].[c], [o1].[c0]
+        FROM (
+            SELECT JSON_VALUE([o].[OwnedReferenceLeaf], '$.SomethingSomething') AS [c], [o].[Date] AS [c0]
+            FROM OPENJSON([j].[OwnedReferenceRoot], '$.OwnedCollectionBranch') WITH (
+                [Date] datetime2 '$.Date',
+                [Enum] int '$.Enum',
+                [Fraction] decimal(18,2) '$.Fraction',
+                [OwnedReferenceLeaf] nvarchar(max) '$.OwnedReferenceLeaf' AS JSON
+            ) AS [o]
+        ) AS [o1]
+        ORDER BY [o1].[c0] DESC
         OFFSET 1 ROWS
     ) AS [o0]
     ORDER BY [o0].[c0] DESC
@@ -1249,10 +1255,16 @@ ORDER BY [j].[Id], [s].[c5], [s].[key], [s].[c6]
 SELECT [j].[Id], [o0].[Id], [o0].[Name], [o0].[Names], [o0].[Number], [o0].[Numbers], [o0].[c], [o0].[c0], [o0].[key]
 FROM [JsonEntitiesBasic] AS [j]
 OUTER APPLY (
-    SELECT [j].[Id], JSON_VALUE([o].[value], '$.Name') AS [Name], JSON_QUERY([o].[value], '$.Names') AS [Names], CAST(JSON_VALUE([o].[value], '$.Number') AS int) AS [Number], JSON_QUERY([o].[value], '$.Numbers') AS [Numbers], JSON_QUERY([o].[value], '$.OwnedCollectionBranch') AS [c], JSON_QUERY([o].[value], '$.OwnedReferenceBranch') AS [c0], [o].[key], JSON_VALUE([o].[value], '$.Name') AS [c1]
-    FROM OPENJSON([j].[OwnedCollectionRoot], '$') AS [o]
-    ORDER BY JSON_VALUE([o].[value], '$.Name')
-    OFFSET 1 ROWS FETCH NEXT 5 ROWS ONLY
+    SELECT [o4].[Id], [o4].[Name], [o4].[Names], [o4].[Number], [o4].[Numbers], [o4].[c], [o4].[c0], [o4].[key], [o4].[c1]
+    FROM (
+        SELECT TOP(5) [o3].[Id], [o3].[Name], [o3].[Names], [o3].[Number], [o3].[Numbers], [o3].[c], [o3].[c0], [o3].[key], [o3].[c1]
+        FROM (
+            SELECT [j].[Id], JSON_VALUE([o].[value], '$.Name') AS [Name], JSON_QUERY([o].[value], '$.Names') AS [Names], CAST(JSON_VALUE([o].[value], '$.Number') AS int) AS [Number], JSON_QUERY([o].[value], '$.Numbers') AS [Numbers], JSON_QUERY([o].[value], '$.OwnedCollectionBranch') AS [c], JSON_QUERY([o].[value], '$.OwnedReferenceBranch') AS [c0], [o].[key], JSON_VALUE([o].[value], '$.Name') AS [c1]
+            FROM OPENJSON([j].[OwnedCollectionRoot], '$') AS [o]
+        ) AS [o3]
+    ) AS [o4]
+    ORDER BY [o4].[c1]
+    OFFSET 1 ROWS
 ) AS [o0]
 ORDER BY [j].[Id], [o0].[c1]
 """);
@@ -1267,10 +1279,16 @@ ORDER BY [j].[Id], [o0].[c1]
 SELECT [j].[Id], [o0].[c], [o0].[c0], [o0].[c1], [o0].[c2], [o0].[c3], [o0].[Id], [o0].[c4], [o0].[key]
 FROM [JsonEntitiesBasic] AS [j]
 OUTER APPLY (
-    SELECT JSON_VALUE([o].[value], '$.Name') AS [c], JSON_QUERY([o].[value], '$.Names') AS [c0], CAST(JSON_VALUE([o].[value], '$.Number') AS int) AS [c1], JSON_QUERY([o].[value], '$.Numbers') AS [c2], JSON_QUERY([o].[value], '$.OwnedCollectionBranch') AS [c3], [j].[Id], JSON_QUERY([o].[value], '$.OwnedReferenceBranch') AS [c4], [o].[key]
-    FROM OPENJSON([j].[OwnedCollectionRoot], '$') AS [o]
-    ORDER BY JSON_VALUE([o].[value], '$.Name')
-    OFFSET 1 ROWS FETCH NEXT 5 ROWS ONLY
+    SELECT [o4].[c], [o4].[c0], [o4].[c1], [o4].[c2], [o4].[c3], [o4].[Id], [o4].[c4], [o4].[key]
+    FROM (
+        SELECT TOP(5) [o3].[c], [o3].[c0], [o3].[c1], [o3].[c2], [o3].[c3], [o3].[Id], [o3].[c4], [o3].[key]
+        FROM (
+            SELECT JSON_VALUE([o].[value], '$.Name') AS [c], JSON_QUERY([o].[value], '$.Names') AS [c0], CAST(JSON_VALUE([o].[value], '$.Number') AS int) AS [c1], JSON_QUERY([o].[value], '$.Numbers') AS [c2], JSON_QUERY([o].[value], '$.OwnedCollectionBranch') AS [c3], [j].[Id], JSON_QUERY([o].[value], '$.OwnedReferenceBranch') AS [c4], [o].[key]
+            FROM OPENJSON([j].[OwnedCollectionRoot], '$') AS [o]
+        ) AS [o3]
+    ) AS [o4]
+    ORDER BY [o4].[c]
+    OFFSET 1 ROWS
 ) AS [o0]
 ORDER BY [j].[Id], [o0].[c]
 """);
@@ -1285,10 +1303,16 @@ ORDER BY [j].[Id], [o0].[c]
 SELECT [j].[Id], [o0].[c], [o0].[Id], [o0].[key]
 FROM [JsonEntitiesBasic] AS [j]
 OUTER APPLY (
-    SELECT JSON_QUERY([o].[value], '$.OwnedReferenceBranch') AS [c], [j].[Id], [o].[key], JSON_VALUE([o].[value], '$.Name') AS [c0]
-    FROM OPENJSON([j].[OwnedCollectionRoot], '$') AS [o]
-    ORDER BY JSON_VALUE([o].[value], '$.Name')
-    OFFSET 1 ROWS FETCH NEXT 5 ROWS ONLY
+    SELECT [o4].[c], [o4].[Id], [o4].[key], [o4].[c0]
+    FROM (
+        SELECT TOP(5) [o3].[c], [o3].[Id], [o3].[key], [o3].[c0]
+        FROM (
+            SELECT JSON_QUERY([o].[value], '$.OwnedReferenceBranch') AS [c], [j].[Id], [o].[key], JSON_VALUE([o].[value], '$.Name') AS [c0]
+            FROM OPENJSON([j].[OwnedCollectionRoot], '$') AS [o]
+        ) AS [o3]
+    ) AS [o4]
+    ORDER BY [o4].[c0]
+    OFFSET 1 ROWS
 ) AS [o0]
 ORDER BY [j].[Id], [o0].[c0]
 """);

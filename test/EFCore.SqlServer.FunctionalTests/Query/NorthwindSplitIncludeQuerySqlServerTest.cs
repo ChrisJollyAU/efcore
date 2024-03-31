@@ -361,18 +361,17 @@ ORDER BY (
             """
 SELECT [o0].[OrderID], [o0].[CustomerID], [o0].[EmployeeID], [o0].[OrderDate], [c0].[CustomerID]
 FROM (
-    SELECT TOP(1) [c].[CustomerID], (
-        SELECT TOP(1) [o].[OrderDate]
-        FROM [Orders] AS [o]
-        WHERE [c].[CustomerID] = [o].[CustomerID]
-        ORDER BY [o].[OrderDate] DESC) AS [c]
-    FROM [Customers] AS [c]
-    WHERE [c].[CustomerID] LIKE N'W%'
-    ORDER BY (
-        SELECT TOP(1) [o].[OrderDate]
-        FROM [Orders] AS [o]
-        WHERE [c].[CustomerID] = [o].[CustomerID]
-        ORDER BY [o].[OrderDate] DESC) DESC
+    SELECT TOP(1) [c1].[CustomerID], [c1].[c]
+    FROM (
+        SELECT [c].[CustomerID], (
+            SELECT TOP(1) [o].[OrderDate]
+            FROM [Orders] AS [o]
+            WHERE [c].[CustomerID] = [o].[CustomerID]
+            ORDER BY [o].[OrderDate] DESC) AS [c]
+        FROM [Customers] AS [c]
+        WHERE [c].[CustomerID] LIKE N'W%'
+    ) AS [c1]
+    ORDER BY [c1].[c] DESC
 ) AS [c0]
 INNER JOIN [Orders] AS [o0] ON [c0].[CustomerID] = [o0].[CustomerID]
 ORDER BY [c0].[c] DESC, [c0].[CustomerID]
@@ -521,18 +520,17 @@ ORDER BY (
             """
 SELECT [o0].[OrderID], [o0].[CustomerID], [o0].[EmployeeID], [o0].[OrderDate], [c0].[CustomerID]
 FROM (
-    SELECT TOP(1) [c].[CustomerID], (
-        SELECT TOP(1) [o].[OrderDate]
-        FROM [Orders] AS [o]
-        WHERE [c].[CustomerID] = [o].[CustomerID]
-        ORDER BY [o].[EmployeeID]) AS [c]
-    FROM [Customers] AS [c]
-    WHERE [c].[CustomerID] = N'ALFKI'
-    ORDER BY (
-        SELECT TOP(1) [o].[OrderDate]
-        FROM [Orders] AS [o]
-        WHERE [c].[CustomerID] = [o].[CustomerID]
-        ORDER BY [o].[EmployeeID])
+    SELECT TOP(1) [c1].[CustomerID], [c1].[c]
+    FROM (
+        SELECT [c].[CustomerID], (
+            SELECT TOP(1) [o].[OrderDate]
+            FROM [Orders] AS [o]
+            WHERE [c].[CustomerID] = [o].[CustomerID]
+            ORDER BY [o].[EmployeeID]) AS [c]
+        FROM [Customers] AS [c]
+        WHERE [c].[CustomerID] = N'ALFKI'
+    ) AS [c1]
+    ORDER BY [c1].[c]
 ) AS [c0]
 INNER JOIN [Orders] AS [o0] ON [c0].[CustomerID] = [o0].[CustomerID]
 ORDER BY [c0].[c], [c0].[CustomerID]
@@ -1481,22 +1479,19 @@ END, [o].[OrderID], [c].[CustomerID]
 
 SELECT [o0].[OrderID], [o0].[ProductID], [o0].[Discount], [o0].[Quantity], [o0].[UnitPrice], [s].[OrderID], [s].[CustomerID]
 FROM (
-    SELECT TOP(@__p_0) [o].[OrderID], [c].[CustomerID], CASE
-        WHEN [o].[OrderID] > 0 THEN CAST(1 AS bit)
-        ELSE CAST(0 AS bit)
-    END AS [c], CASE
-        WHEN [c].[CustomerID] IS NOT NULL THEN [c].[City]
-        ELSE N''
-    END AS [c0]
-    FROM [Orders] AS [o]
-    LEFT JOIN [Customers] AS [c] ON [o].[CustomerID] = [c].[CustomerID]
-    ORDER BY CASE
-        WHEN [o].[OrderID] > 0 THEN CAST(1 AS bit)
-        ELSE CAST(0 AS bit)
-    END, CASE
-        WHEN [c].[CustomerID] IS NOT NULL THEN [c].[City]
-        ELSE N''
-    END
+    SELECT TOP(@__p_0) [s0].[OrderID], [s0].[CustomerID], [s0].[c], [s0].[c0]
+    FROM (
+        SELECT [o].[OrderID], [c].[CustomerID], CASE
+            WHEN [o].[OrderID] > 0 THEN CAST(1 AS bit)
+            ELSE CAST(0 AS bit)
+        END AS [c], CASE
+            WHEN [c].[CustomerID] IS NOT NULL THEN [c].[City]
+            ELSE N''
+        END AS [c0]
+        FROM [Orders] AS [o]
+        LEFT JOIN [Customers] AS [c] ON [o].[CustomerID] = [c].[CustomerID]
+    ) AS [s0]
+    ORDER BY [s0].[c], [s0].[c0]
 ) AS [s]
 INNER JOIN [Order Details] AS [o0] ON [s].[OrderID] = [o0].[OrderID]
 ORDER BY [s].[c], [s].[c0], [s].[OrderID], [s].[CustomerID]
@@ -1506,9 +1501,8 @@ ORDER BY [s].[c], [s].[c0], [s].[OrderID], [s].[CustomerID]
     public override async Task Then_include_collection_order_by_collection_column(bool async)
     {
         await base.Then_include_collection_order_by_collection_column(async);
-
-        AssertSql(
-            """
+AssertSql(
+    """
 SELECT TOP(1) [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
 WHERE [c].[CustomerID] LIKE N'W%'
@@ -1518,42 +1512,40 @@ ORDER BY (
     WHERE [c].[CustomerID] = [o].[CustomerID]
     ORDER BY [o].[OrderDate] DESC) DESC, [c].[CustomerID]
 """,
-            //
-            """
+    //
+    """
 SELECT [o0].[OrderID], [o0].[CustomerID], [o0].[EmployeeID], [o0].[OrderDate], [c0].[CustomerID]
 FROM (
-    SELECT TOP(1) [c].[CustomerID], (
-        SELECT TOP(1) [o].[OrderDate]
-        FROM [Orders] AS [o]
-        WHERE [c].[CustomerID] = [o].[CustomerID]
-        ORDER BY [o].[OrderDate] DESC) AS [c]
-    FROM [Customers] AS [c]
-    WHERE [c].[CustomerID] LIKE N'W%'
-    ORDER BY (
-        SELECT TOP(1) [o].[OrderDate]
-        FROM [Orders] AS [o]
-        WHERE [c].[CustomerID] = [o].[CustomerID]
-        ORDER BY [o].[OrderDate] DESC) DESC
+    SELECT TOP(1) [c1].[CustomerID], [c1].[c]
+    FROM (
+        SELECT [c].[CustomerID], (
+            SELECT TOP(1) [o].[OrderDate]
+            FROM [Orders] AS [o]
+            WHERE [c].[CustomerID] = [o].[CustomerID]
+            ORDER BY [o].[OrderDate] DESC) AS [c]
+        FROM [Customers] AS [c]
+        WHERE [c].[CustomerID] LIKE N'W%'
+    ) AS [c1]
+    ORDER BY [c1].[c] DESC
 ) AS [c0]
 INNER JOIN [Orders] AS [o0] ON [c0].[CustomerID] = [o0].[CustomerID]
 ORDER BY [c0].[c] DESC, [c0].[CustomerID], [o0].[OrderID]
 """,
-            //
-            """
+    //
+    """
 SELECT [o1].[OrderID], [o1].[ProductID], [o1].[Discount], [o1].[Quantity], [o1].[UnitPrice], [c0].[CustomerID], [o0].[OrderID]
 FROM (
-    SELECT TOP(1) [c].[CustomerID], (
-        SELECT TOP(1) [o].[OrderDate]
-        FROM [Orders] AS [o]
-        WHERE [c].[CustomerID] = [o].[CustomerID]
-        ORDER BY [o].[OrderDate] DESC) AS [c]
-    FROM [Customers] AS [c]
-    WHERE [c].[CustomerID] LIKE N'W%'
-    ORDER BY (
-        SELECT TOP(1) [o].[OrderDate]
-        FROM [Orders] AS [o]
-        WHERE [c].[CustomerID] = [o].[CustomerID]
-        ORDER BY [o].[OrderDate] DESC) DESC
+    SELECT TOP(1) [c2].[CustomerID], [c2].[c]
+    FROM (
+        SELECT [c].[CustomerID], (
+            SELECT TOP(1) [o].[OrderDate]
+            FROM [Orders] AS [o]
+            WHERE [c].[CustomerID] = [o].[CustomerID]
+            ORDER BY [o].[OrderDate] DESC) AS [c]
+        FROM [Customers] AS [c]
+        WHERE [c].[CustomerID] LIKE N'W%'
+    ) AS [c2]
+    ORDER BY [c2].[c] DESC
 ) AS [c0]
 INNER JOIN [Orders] AS [o0] ON [c0].[CustomerID] = [o0].[CustomerID]
 INNER JOIN [Order Details] AS [o1] ON [o0].[OrderID] = [o1].[OrderID]
@@ -2067,22 +2059,19 @@ OFFSET @__p_1 ROWS
 
 SELECT [o].[OrderID], [o].[CustomerID], [o].[EmployeeID], [o].[OrderDate], [c0].[CustomerID]
 FROM (
-    SELECT [c].[CustomerID], CASE
-        WHEN [c].[CustomerID] IN (
-            SELECT [l].[value]
-            FROM OPENJSON(@__list_0) WITH ([value] nchar(5) '$') AS [l]
-        ) THEN CAST(1 AS bit)
-        ELSE CAST(0 AS bit)
-    END AS [c]
-    FROM [Customers] AS [c]
-    WHERE [c].[CustomerID] LIKE N'A%'
-    ORDER BY CASE
-        WHEN [c].[CustomerID] IN (
-            SELECT [l].[value]
-            FROM OPENJSON(@__list_0) WITH ([value] nchar(5) '$') AS [l]
-        ) THEN CAST(1 AS bit)
-        ELSE CAST(0 AS bit)
-    END
+    SELECT [c1].[CustomerID], [c1].[c]
+    FROM (
+        SELECT [c].[CustomerID], CASE
+            WHEN [c].[CustomerID] IN (
+                SELECT [l].[value]
+                FROM OPENJSON(@__list_0) WITH ([value] nchar(5) '$') AS [l]
+            ) THEN CAST(1 AS bit)
+            ELSE CAST(0 AS bit)
+        END AS [c]
+        FROM [Customers] AS [c]
+        WHERE [c].[CustomerID] LIKE N'A%'
+    ) AS [c1]
+    ORDER BY [c1].[c]
     OFFSET @__p_1 ROWS
 ) AS [c0]
 INNER JOIN [Orders] AS [o] ON [c0].[CustomerID] = [o].[CustomerID]
@@ -2118,22 +2107,19 @@ OFFSET @__p_1 ROWS
 
 SELECT [o].[OrderID], [o].[CustomerID], [o].[EmployeeID], [o].[OrderDate], [c0].[CustomerID]
 FROM (
-    SELECT [c].[CustomerID], CASE
-        WHEN [c].[CustomerID] NOT IN (
-            SELECT [l].[value]
-            FROM OPENJSON(@__list_0) WITH ([value] nchar(5) '$') AS [l]
-        ) THEN CAST(1 AS bit)
-        ELSE CAST(0 AS bit)
-    END AS [c]
-    FROM [Customers] AS [c]
-    WHERE [c].[CustomerID] LIKE N'A%'
-    ORDER BY CASE
-        WHEN [c].[CustomerID] NOT IN (
-            SELECT [l].[value]
-            FROM OPENJSON(@__list_0) WITH ([value] nchar(5) '$') AS [l]
-        ) THEN CAST(1 AS bit)
-        ELSE CAST(0 AS bit)
-    END
+    SELECT [c1].[CustomerID], [c1].[c]
+    FROM (
+        SELECT [c].[CustomerID], CASE
+            WHEN [c].[CustomerID] NOT IN (
+                SELECT [l].[value]
+                FROM OPENJSON(@__list_0) WITH ([value] nchar(5) '$') AS [l]
+            ) THEN CAST(1 AS bit)
+            ELSE CAST(0 AS bit)
+        END AS [c]
+        FROM [Customers] AS [c]
+        WHERE [c].[CustomerID] LIKE N'A%'
+    ) AS [c1]
+    ORDER BY [c1].[c]
     OFFSET @__p_1 ROWS
 ) AS [c0]
 INNER JOIN [Orders] AS [o] ON [c0].[CustomerID] = [o].[CustomerID]
@@ -2169,22 +2155,19 @@ OFFSET @__p_1 ROWS
 
 SELECT [o].[OrderID], [o].[CustomerID], [o].[EmployeeID], [o].[OrderDate], [c0].[CustomerID]
 FROM (
-    SELECT [c].[CustomerID], CASE
-        WHEN [c].[CustomerID] IN (
-            SELECT [l].[value]
-            FROM OPENJSON(@__list_0) WITH ([value] nchar(5) '$') AS [l]
-        ) THEN CAST(1 AS bit)
-        ELSE CAST(0 AS bit)
-    END AS [c]
-    FROM [Customers] AS [c]
-    WHERE [c].[CustomerID] LIKE N'A%'
-    ORDER BY CASE
-        WHEN [c].[CustomerID] IN (
-            SELECT [l].[value]
-            FROM OPENJSON(@__list_0) WITH ([value] nchar(5) '$') AS [l]
-        ) THEN CAST(1 AS bit)
-        ELSE CAST(0 AS bit)
-    END
+    SELECT [c1].[CustomerID], [c1].[c]
+    FROM (
+        SELECT [c].[CustomerID], CASE
+            WHEN [c].[CustomerID] IN (
+                SELECT [l].[value]
+                FROM OPENJSON(@__list_0) WITH ([value] nchar(5) '$') AS [l]
+            ) THEN CAST(1 AS bit)
+            ELSE CAST(0 AS bit)
+        END AS [c]
+        FROM [Customers] AS [c]
+        WHERE [c].[CustomerID] LIKE N'A%'
+    ) AS [c1]
+    ORDER BY [c1].[c]
     OFFSET @__p_1 ROWS
 ) AS [c0]
 INNER JOIN [Orders] AS [o] ON [c0].[CustomerID] = [o].[CustomerID]
@@ -2220,22 +2203,19 @@ OFFSET @__p_1 ROWS
 
 SELECT [o].[OrderID], [o].[CustomerID], [o].[EmployeeID], [o].[OrderDate], [c0].[CustomerID]
 FROM (
-    SELECT [c].[CustomerID], CASE
-        WHEN [c].[CustomerID] NOT IN (
-            SELECT [l].[value]
-            FROM OPENJSON(@__list_0) WITH ([value] nchar(5) '$') AS [l]
-        ) THEN CAST(1 AS bit)
-        ELSE CAST(0 AS bit)
-    END AS [c]
-    FROM [Customers] AS [c]
-    WHERE [c].[CustomerID] LIKE N'A%'
-    ORDER BY CASE
-        WHEN [c].[CustomerID] NOT IN (
-            SELECT [l].[value]
-            FROM OPENJSON(@__list_0) WITH ([value] nchar(5) '$') AS [l]
-        ) THEN CAST(1 AS bit)
-        ELSE CAST(0 AS bit)
-    END
+    SELECT [c1].[CustomerID], [c1].[c]
+    FROM (
+        SELECT [c].[CustomerID], CASE
+            WHEN [c].[CustomerID] NOT IN (
+                SELECT [l].[value]
+                FROM OPENJSON(@__list_0) WITH ([value] nchar(5) '$') AS [l]
+            ) THEN CAST(1 AS bit)
+            ELSE CAST(0 AS bit)
+        END AS [c]
+        FROM [Customers] AS [c]
+        WHERE [c].[CustomerID] LIKE N'A%'
+    ) AS [c1]
+    ORDER BY [c1].[c]
     OFFSET @__p_1 ROWS
 ) AS [c0]
 INNER JOIN [Orders] AS [o] ON [c0].[CustomerID] = [o].[CustomerID]
@@ -3051,22 +3031,19 @@ END, [o].[OrderID], [c].[CustomerID]
 
 SELECT [o0].[OrderID], [o0].[ProductID], [o0].[Discount], [o0].[Quantity], [o0].[UnitPrice], [s].[OrderID], [s].[CustomerID]
 FROM (
-    SELECT TOP(@__p_0) [o].[OrderID], [c].[CustomerID], CASE
-        WHEN [c].[CustomerID] IS NOT NULL THEN CAST(1 AS bit)
-        ELSE CAST(0 AS bit)
-    END AS [c], CASE
-        WHEN [c].[CustomerID] IS NOT NULL THEN [c].[CustomerID]
-        ELSE N''
-    END AS [c0]
-    FROM [Orders] AS [o]
-    LEFT JOIN [Customers] AS [c] ON [o].[CustomerID] = [c].[CustomerID]
-    ORDER BY CASE
-        WHEN [c].[CustomerID] IS NOT NULL THEN CAST(1 AS bit)
-        ELSE CAST(0 AS bit)
-    END, CASE
-        WHEN [c].[CustomerID] IS NOT NULL THEN [c].[CustomerID]
-        ELSE N''
-    END
+    SELECT TOP(@__p_0) [s0].[OrderID], [s0].[CustomerID], [s0].[c], [s0].[c0]
+    FROM (
+        SELECT [o].[OrderID], [c].[CustomerID], CASE
+            WHEN [c].[CustomerID] IS NOT NULL THEN CAST(1 AS bit)
+            ELSE CAST(0 AS bit)
+        END AS [c], CASE
+            WHEN [c].[CustomerID] IS NOT NULL THEN [c].[CustomerID]
+            ELSE N''
+        END AS [c0]
+        FROM [Orders] AS [o]
+        LEFT JOIN [Customers] AS [c] ON [o].[CustomerID] = [c].[CustomerID]
+    ) AS [s0]
+    ORDER BY [s0].[c], [s0].[c0]
 ) AS [s]
 INNER JOIN [Order Details] AS [o0] ON [s].[OrderID] = [o0].[OrderID]
 ORDER BY [s].[c], [s].[c0], [s].[OrderID], [s].[CustomerID]

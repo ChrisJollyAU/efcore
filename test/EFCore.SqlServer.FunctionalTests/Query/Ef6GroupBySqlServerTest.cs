@@ -517,16 +517,16 @@ ORDER BY CAST(LEN((
 
         AssertSql(
             """
-SELECT (
-    SELECT TOP(1) [p0].[LastName]
-    FROM [Person] AS [p0]
-    WHERE [p].[FirstName] = [p0].[FirstName] OR ([p].[FirstName] IS NULL AND [p0].[FirstName] IS NULL))
-FROM [Person] AS [p]
-GROUP BY [p].[FirstName]
-ORDER BY (
-    SELECT TOP(1) [p0].[LastName]
-    FROM [Person] AS [p0]
-    WHERE [p].[FirstName] = [p0].[FirstName] OR ([p].[FirstName] IS NULL AND [p0].[FirstName] IS NULL))
+SELECT [p2].[c]
+FROM (
+    SELECT (
+        SELECT TOP(1) [p0].[LastName]
+        FROM [Person] AS [p0]
+        WHERE [p].[FirstName] = [p0].[FirstName] OR ([p].[FirstName] IS NULL AND [p0].[FirstName] IS NULL)) AS [c], [p].[FirstName]
+    FROM [Person] AS [p]
+    GROUP BY [p].[FirstName]
+) AS [p2]
+ORDER BY [p2].[c]
 """);
     }
 
@@ -536,17 +536,17 @@ ORDER BY (
 
         AssertSql(
             """
-SELECT (
-    SELECT TOP(1) [p0].[MiddleInitial]
-    FROM [Person] AS [p0]
-    WHERE [p0].[Age] = 20 AND [p].[Id] = [p0].[Id])
-FROM [Person] AS [p]
-WHERE [p].[Age] = 20
-GROUP BY [p].[Id]
-ORDER BY (
-    SELECT TOP(1) [p0].[MiddleInitial]
-    FROM [Person] AS [p0]
-    WHERE [p0].[Age] = 20 AND [p].[Id] = [p0].[Id])
+SELECT [p2].[c]
+FROM (
+    SELECT (
+        SELECT TOP(1) [p0].[MiddleInitial]
+        FROM [Person] AS [p0]
+        WHERE [p0].[Age] = 20 AND [p].[Id] = [p0].[Id]) AS [c], [p].[Id]
+    FROM [Person] AS [p]
+    WHERE [p].[Age] = 20
+    GROUP BY [p].[Id]
+) AS [p2]
+ORDER BY [p2].[c]
 """);
     }
 
