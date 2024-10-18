@@ -114,12 +114,17 @@ public class ComplexProperty : PropertyBase, IMutableComplexProperty, IConventio
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool? SetIsNullable(bool? nullable, ConfigurationSource configurationSource)
+    public virtual bool? SetIsNullable(bool? nullable, ConfigurationSource configurationSource, bool fromRequiredAttribute = false)
     {
         EnsureMutable();
 
+        if (fromRequiredAttribute)
+        {
+            _isRequiredAttribute = true;
+        }
+
         var isChanging = (nullable ?? DefaultIsNullable) != IsNullable;
-        if (nullable == null)
+        if (nullable == null && !_isRequiredAttribute)
         {
             _isNullable = null;
             _isNullableConfigurationSource = null;
@@ -131,7 +136,7 @@ public class ComplexProperty : PropertyBase, IMutableComplexProperty, IConventio
             return nullable;
         }
 
-        if (nullable.Value)
+        if (nullable != null && nullable.Value)
         {
             if (!ClrType.IsNullableType())
             {
@@ -149,8 +154,10 @@ public class ComplexProperty : PropertyBase, IMutableComplexProperty, IConventio
             : nullable;
     }
 
+    private bool _isRequiredAttribute = false;
+
     private bool DefaultIsNullable
-        => ClrType.IsNullableType();
+        => ClrType.IsNullableType() && !_isRequiredAttribute;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

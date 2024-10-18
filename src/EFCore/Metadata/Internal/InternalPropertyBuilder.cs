@@ -42,7 +42,7 @@ public class InternalPropertyBuilder
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual InternalPropertyBuilder? IsRequired(bool? required, ConfigurationSource configurationSource)
+    public virtual InternalPropertyBuilder? IsRequired(bool? required, ConfigurationSource configurationSource, bool fromRequiredAttribute = false)
     {
         if (configurationSource != ConfigurationSource.Explicit
             && !CanSetIsRequired(required, configurationSource))
@@ -68,12 +68,12 @@ public class InternalPropertyBuilder
                     Check.DebugAssert(removed != null, "removed is null");
                 }
 
-                Metadata.SetIsNullable(true, configurationSource);
+                Metadata.SetIsNullable(true, configurationSource, fromRequiredAttribute);
             }
         }
         else
         {
-            Metadata.SetIsNullable(!required, configurationSource);
+            Metadata.SetIsNullable(!required, configurationSource, fromRequiredAttribute);
         }
 
         return this;
@@ -1117,8 +1117,8 @@ public class InternalPropertyBuilder
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    IConventionPropertyBuilder? IConventionPropertyBuilder.IsRequired(bool? required, bool fromDataAnnotation)
-        => IsRequired(required, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+    IConventionPropertyBuilder? IConventionPropertyBuilder.IsRequired(bool? required, bool fromDataAnnotation, bool fromRequiredAttribute)
+        => IsRequired(required, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention, fromRequiredAttribute);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

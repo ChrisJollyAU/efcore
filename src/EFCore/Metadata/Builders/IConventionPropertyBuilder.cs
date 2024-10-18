@@ -34,11 +34,12 @@ public interface IConventionPropertyBuilder : IConventionPropertyBaseBuilder<ICo
     ///     <see langword="null" /> to reset to default.
     /// </param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// /// <param name="fromRequiredAttribute">Indicates whether the configuration came from the <c>Required</c> attribute.</param>
     /// <returns>
     ///     The same builder instance if the requiredness was configured,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    IConventionPropertyBuilder? IsRequired(bool? required, bool fromDataAnnotation = false);
+    IConventionPropertyBuilder? IsRequired(bool? required, bool fromDataAnnotation = false, bool fromRequiredAttribute = false);
 
     /// <summary>
     ///     Returns a value indicating whether this property requiredness can be configured

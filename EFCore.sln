@@ -143,6 +143,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFCore.Tasks", "src\EFCore.
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "EFCore.FSharp.FunctionalTests", "test\EFCore.FSharp.FunctionalTests\EFCore.FSharp.FunctionalTests.fsproj", "{89180105-1D98-4844-9C24-3A5DA2C53329}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test1", "Test1\Test1.csproj", "{D126ABB4-4D80-4747-8E77-E8DC53DED037}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -377,6 +379,10 @@ Global
 		{89180105-1D98-4844-9C24-3A5DA2C53329}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{89180105-1D98-4844-9C24-3A5DA2C53329}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{89180105-1D98-4844-9C24-3A5DA2C53329}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D126ABB4-4D80-4747-8E77-E8DC53DED037}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D126ABB4-4D80-4747-8E77-E8DC53DED037}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D126ABB4-4D80-4747-8E77-E8DC53DED037}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D126ABB4-4D80-4747-8E77-E8DC53DED037}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

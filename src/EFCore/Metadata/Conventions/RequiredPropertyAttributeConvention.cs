@@ -36,7 +36,7 @@ public class RequiredPropertyAttributeConvention : PropertyAttributeConventionBa
         RequiredAttribute attribute,
         MemberInfo clrMember,
         IConventionContext context)
-        => propertyBuilder.IsRequired(true, fromDataAnnotation: true);
+        => propertyBuilder.IsRequired(true, fromDataAnnotation: true, fromRequiredAttribute:true);
 
     /// <summary>
     ///     Called after a complex property is added to a type with an attribute on the associated CLR property or field.
@@ -50,5 +50,5 @@ public class RequiredPropertyAttributeConvention : PropertyAttributeConventionBa
         RequiredAttribute attribute,
         MemberInfo clrMember,
         IConventionContext context)
-        => propertyBuilder.IsRequired(true, fromDataAnnotation: true);
+        => propertyBuilder.IsRequired(true, fromDataAnnotation: true, fromRequiredAttribute: true);
 }
