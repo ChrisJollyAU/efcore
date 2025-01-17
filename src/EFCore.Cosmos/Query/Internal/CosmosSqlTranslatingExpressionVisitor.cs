@@ -3,6 +3,7 @@
 
 using System.Collections;
 using System.Diagnostics.CodeAnalysis;
+using Microsoft.EntityFrameworkCore.Cosmos.Extensions;
 using Microsoft.EntityFrameworkCore.Cosmos.Internal;
 using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.EntityFrameworkCore.Query;
@@ -623,6 +624,81 @@ public class CosmosSqlTranslatingExpressionVisitor(
 
                 break;
             }
+            // Translate EF.Functions.Greatest/Least.
+            // These are here rather than in a MethodTranslator since the parameter is an array, and that's not supported in regular
+            // translation.
+            case
+            {
+                Method.Name: nameof(CosmosDbFunctionsExtensions.Least) or nameof(CosmosDbFunctionsExtensions.Greatest),
+                Arguments: [_, NewArrayExpression newArray]
+            } when method.DeclaringType == typeof(CosmosDbFunctionsExtensions):
+            {
+                var values = newArray.Expressions;
+                var translatedValues = new SqlExpression[values.Count];
+
+                for (var i = 0; i < values.Count; i++)
+                {
+                    var value = values[i];
+                    var visitedValue = Visit(value);
+
+                    if (TranslationFailed(value, visitedValue, out var translatedValue))
+                    {
+                        return QueryCompilationContext.NotTranslatedExpression;
+                    }
+
+                    translatedValues[i] = translatedValue!;
+                }
+
+                var elementClrType = newArray.Type.GetElementType()!.UnwrapNullableType();
+
+                return method.Name switch
+                {
+                    nameof(CosmosDbFunctionsExtensions.Greatest) => GenerateGreatest(translatedValues, elementClrType),
+                    nameof(CosmosDbFunctionsExtensions.Least) => GenerateLeast(translatedValues, elementClrType),
+                    _ => throw new UnreachableException()
+                }
+                    ?? QueryCompilationContext.NotTranslatedExpression;
+            }
+
+            // Translate Math.Max/Min.
+            // These are here rather than in a MethodTranslator since we use TranslateGreatest/Least, and since these are very similar to
+            // the EF.Functions.Greatest/Least translation just above.
+            case
+            {
+                Method.Name: nameof(Math.Max) or nameof(Math.Min),
+                Arguments: [Expression argument1, Expression argument2]
+            } when method.DeclaringType == typeof(Math):
+            {
+                var translatedArguments = new List<SqlExpression>();
+                var returnType = method.ReturnType.UnwrapNullableType();
+
+                return TryFlattenVisit(argument1)
+                    && TryFlattenVisit(argument2)
+                    && method.Name switch
+                    {
+                        nameof(Math.Max) => GenerateGreatest(translatedArguments, returnType),
+                        nameof(Math.Min) => GenerateLeast(translatedArguments, returnType),
+                        _ => throw new UnreachableException()
+                    } is SqlExpression translatedFunctionCall
+                        ? translatedFunctionCall
+                        : QueryCompilationContext.NotTranslatedExpression;
+
+                bool TryFlattenVisit(Expression argument)
+                {
+                    if (argument is MethodCallExpression nestedCall && nestedCall.Method == method)
+                    {
+                        return TryFlattenVisit(nestedCall.Arguments[0]) && TryFlattenVisit(nestedCall.Arguments[1]);
+                    }
+
+                    if (TranslationFailed(argument, Visit(argument), out var translatedArgument))
+                    {
+                        return false;
+                    }
+
+                    translatedArguments.Add(translatedArgument!);
+                    return true;
+                }
+            }
 
             case { Method: { Name: nameof(Enumerable.Contains), IsGenericMethod: true } }
                 when method.GetGenericMethodDefinition().Equals(EnumerableMethods.Contains):
@@ -765,6 +841,46 @@ public class CosmosSqlTranslatingExpressionVisitor(
                 && unaryExpression.Type == typeof(object)
                     ? unaryExpression.Operand
                     : expression;
+    }
+
+    /// <summary>
+    ///     Generates a SQL GREATEST expression over the given expressions.
+    /// </summary>
+    public virtual SqlExpression? GenerateGreatest(IReadOnlyList<SqlExpression> expressions, Type resultType)
+    {
+        if (expressions.Count == 0)
+        {
+            return null;
+        }
+
+        return expressions.Aggregate((current, next) =>
+            sqlExpressionFactory.Case(
+                [
+                    new CaseWhenClause(
+                        sqlExpressionFactory.GreaterThan(current, next),
+                        current)
+                ],
+                elseResult: next));
+    }
+
+    /// <summary>
+    ///     Generates a SQL GREATEST expression over the given expressions.
+    /// </summary>
+    public virtual SqlExpression? GenerateLeast(IReadOnlyList<SqlExpression> expressions, Type resultType)
+    {
+        if (expressions.Count == 0)
+        {
+            return null;
+        }
+
+        return expressions.Aggregate((current, next) =>
+            sqlExpressionFactory.Case(
+                [
+                    new CaseWhenClause(
+                        sqlExpressionFactory.LessThan(current, next),
+                        current)
+                ],
+                elseResult: next));
     }
 
     /// <summary>

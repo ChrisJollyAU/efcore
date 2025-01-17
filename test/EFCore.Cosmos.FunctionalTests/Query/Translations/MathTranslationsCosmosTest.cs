@@ -540,53 +540,89 @@ WHERE (SIGN(c["Float"]) > 0)
 """);
             });
 
-    public override async Task Max(bool async)
-    {
-        // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() => base.Max(async));
+    public override Task Max(bool async)
+        => Fixture.NoSyncTest(
+            async, async a =>
+            {
+                await base.Max(a);
 
-        AssertSql();
-    }
+                AssertSql(
+                    """
+SELECT VALUE c
+FROM root c
+WHERE (IIF((c["Int"] > (c["Short"] - 3)), c["Int"], (c["Short"] - 3)) = c["Int"])
+""");
+            });
 
-    public override async Task Max_nested(bool async)
-    {
-        // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() => base.Max(async));
+    public override Task Max_nested(bool async)
+        => Fixture.NoSyncTest(
+            async, async a =>
+            {
+                await base.Max_nested(a);
 
-        AssertSql();
-    }
+                AssertSql(
+                    """
+SELECT VALUE c
+FROM root c
+WHERE (IIF((c["Int"] > (c["Short"] - 3)), c["Int"], (c["Short"] - 3)) = c["Int"])
+""");
+            });
 
-    public override async Task Max_nested_twice(bool async)
-    {
-        // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() => base.Max(async));
+    public override Task Max_nested_twice(bool async)
+        => Fixture.NoSyncTest(
+            async, async a =>
+            {
+                await base.Max_nested_twice(a);
 
-        AssertSql();
-    }
+                AssertSql(
+                    """
+SELECT VALUE c
+FROM root c
+WHERE (IIF((c["Int"] > (c["Short"] - 3)), c["Int"], (c["Short"] - 3)) = c["Int"])
+""");
+            });
 
-    public override async Task Min(bool async)
-    {
-        // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() => base.Min(async));
+    public override Task Min(bool async)
+        => Fixture.NoSyncTest(
+            async, async a =>
+            {
+                await base.Min(a);
 
-        AssertSql();
-    }
+                AssertSql(
+                    """
+SELECT VALUE c
+FROM root c
+WHERE (IIF((c["Int"] < (c["Short"] + 3)), c["Int"], (c["Short"] + 3)) = c["Int"])
+""");
+            });
 
-    public override async Task Min_nested(bool async)
-    {
-        // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() => base.Min(async));
+    public override Task Min_nested(bool async)
+        => Fixture.NoSyncTest(
+            async, async a =>
+            {
+                await base.Min_nested(a);
 
-        AssertSql();
-    }
+                AssertSql(
+                    """
+SELECT VALUE c
+FROM root c
+WHERE (IIF((IIF(((c["Short"] + 3) < c["Int"]), (c["Short"] + 3), c["Int"]) < 99999), IIF(((c["Short"] + 3) < c["Int"]), (c["Short"] + 3), c["Int"]), 99999) = c["Int"])
+""");
+            });
 
-    public override async Task Min_nested_twice(bool async)
-    {
-        // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() => base.Min(async));
+    public override Task Min_nested_twice(bool async)
+        => Fixture.NoSyncTest(
+            async, async a =>
+            {
+                await base.Min_nested_twice(a);
 
-        AssertSql();
-    }
+                AssertSql(
+                    """
+SELECT VALUE c
+FROM root c
+WHERE (IIF((IIF((IIF((99999 < c["Int"]), 99999, c["Int"]) < 99998), IIF((99999 < c["Int"]), 99999, c["Int"]), 99998) < (c["Short"] + 3)), IIF((IIF((99999 < c["Int"]), 99999, c["Int"]) < 99998), IIF((99999 < c["Int"]), 99999, c["Int"]), 99998), (c["Short"] + 3)) = c["Int"])
+""");
+            });
 
     public override Task Degrees(bool async)
         => Fixture.NoSyncTest(

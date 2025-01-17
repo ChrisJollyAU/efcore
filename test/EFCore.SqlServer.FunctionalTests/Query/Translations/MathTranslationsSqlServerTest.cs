@@ -477,23 +477,129 @@ WHERE SIGN([b].[Float]) > 0
 """);
     }
 
-    public override Task Max(bool async)
-        => AssertTranslationFailed(() => base.Max(async));
+    public override async Task Max(bool async)
+    {
+        await base.Max(async);
 
-    public override Task Max_nested(bool async)
-        => AssertTranslationFailed(() => base.Max_nested(async));
+        AssertSql(
+            """
+SELECT [b].[Id], [b].[Bool], [b].[Byte], [b].[ByteArray], [b].[DateOnly], [b].[DateTime], [b].[DateTimeOffset], [b].[Decimal], [b].[Double], [b].[Enum], [b].[FlagsEnum], [b].[Float], [b].[Guid], [b].[Int], [b].[Long], [b].[Short], [b].[String], [b].[TimeOnly], [b].[TimeSpan]
+FROM [BasicTypesEntities] AS [b]
+WHERE CASE
+    WHEN [b].[Int] > [b].[Short] - CAST(3 AS smallint) THEN [b].[Int]
+    ELSE [b].[Short] - CAST(3 AS smallint)
+END = [b].[Int]
+""");
+    }
 
-    public override Task Max_nested_twice(bool async)
-        => AssertTranslationFailed(() => base.Max_nested_twice(async));
+    public override async Task Max_nested(bool async)
+    {
+        await base.Max_nested(async);
 
-    public override Task Min(bool async)
-        => AssertTranslationFailed(() => base.Min(async));
+        AssertSql(
+            """
+SELECT [b].[Id], [b].[Bool], [b].[Byte], [b].[ByteArray], [b].[DateOnly], [b].[DateTime], [b].[DateTimeOffset], [b].[Decimal], [b].[Double], [b].[Enum], [b].[FlagsEnum], [b].[Float], [b].[Guid], [b].[Int], [b].[Long], [b].[Short], [b].[String], [b].[TimeOnly], [b].[TimeSpan]
+FROM [BasicTypesEntities] AS [b]
+WHERE CASE
+    WHEN CASE
+        WHEN [b].[Short] - CAST(3 AS smallint) > [b].[Int] THEN [b].[Short] - CAST(3 AS smallint)
+        ELSE [b].[Int]
+    END > CAST(1 AS smallint) THEN CASE
+        WHEN [b].[Short] - CAST(3 AS smallint) > [b].[Int] THEN [b].[Short] - CAST(3 AS smallint)
+        ELSE [b].[Int]
+    END
+    ELSE CAST(1 AS smallint)
+END = [b].[Int]
+""");
+    }
 
-    public override Task Min_nested(bool async)
-        => AssertTranslationFailed(() => base.Min_nested(async));
+    public override async Task Max_nested_twice(bool async)
+    {
+        await base.Max_nested_twice(async);
 
-    public override Task Min_nested_twice(bool async)
-        => AssertTranslationFailed(() => base.Min_nested_twice(async));
+        AssertSql(
+            """
+SELECT [b].[Id], [b].[Bool], [b].[Byte], [b].[ByteArray], [b].[DateOnly], [b].[DateTime], [b].[DateTimeOffset], [b].[Decimal], [b].[Double], [b].[Enum], [b].[FlagsEnum], [b].[Float], [b].[Guid], [b].[Int], [b].[Long], [b].[Short], [b].[String], [b].[TimeOnly], [b].[TimeSpan]
+FROM [BasicTypesEntities] AS [b]
+WHERE CASE
+    WHEN CASE
+        WHEN CASE
+            WHEN 1 > [b].[Int] THEN 1
+            ELSE [b].[Int]
+        END > 2 THEN CASE
+            WHEN 1 > [b].[Int] THEN 1
+            ELSE [b].[Int]
+        END
+        ELSE 2
+    END > [b].[Short] - CAST(3 AS smallint) THEN CASE
+        WHEN CASE
+            WHEN 1 > [b].[Int] THEN 1
+            ELSE [b].[Int]
+        END > 2 THEN CASE
+            WHEN 1 > [b].[Int] THEN 1
+            ELSE [b].[Int]
+        END
+        ELSE 2
+    END
+    ELSE [b].[Short] - CAST(3 AS smallint)
+END = [b].[Int]
+""");
+    }
+
+    public override async Task Min(bool async)
+    {
+        await base.Min(async);
+
+        AssertSql(
+            """
+SELECT [b].[Id], [b].[Bool], [b].[Byte], [b].[ByteArray], [b].[DateOnly], [b].[DateTime], [b].[DateTimeOffset], [b].[Decimal], [b].[Double], [b].[Enum], [b].[FlagsEnum], [b].[Float], [b].[Guid], [b].[Int], [b].[Long], [b].[Short], [b].[String], [b].[TimeOnly], [b].[TimeSpan]
+FROM [BasicTypesEntities] AS [b]
+WHERE CASE
+    WHEN [b].[Int] < [b].[Short] + CAST(3 AS smallint) THEN [b].[Int]
+    ELSE [b].[Short] + CAST(3 AS smallint)
+END = [b].[Int]
+""");
+    }
+
+    public override async Task Min_nested(bool async)
+    {
+        await base.Min_nested(async);
+
+        AssertSql();
+    }
+
+    public override async Task Min_nested_twice(bool async)
+    {
+        await base.Min_nested_twice(async);
+
+        AssertSql(
+            """
+SELECT [b].[Id], [b].[Bool], [b].[Byte], [b].[ByteArray], [b].[DateOnly], [b].[DateTime], [b].[DateTimeOffset], [b].[Decimal], [b].[Double], [b].[Enum], [b].[FlagsEnum], [b].[Float], [b].[Guid], [b].[Int], [b].[Long], [b].[Short], [b].[String], [b].[TimeOnly], [b].[TimeSpan]
+FROM [BasicTypesEntities] AS [b]
+WHERE CASE
+    WHEN CASE
+        WHEN CASE
+            WHEN 99999 < [b].[Int] THEN 99999
+            ELSE [b].[Int]
+        END < 99998 THEN CASE
+            WHEN 99999 < [b].[Int] THEN 99999
+            ELSE [b].[Int]
+        END
+        ELSE 99998
+    END < [b].[Short] + CAST(3 AS smallint) THEN CASE
+        WHEN CASE
+            WHEN 99999 < [b].[Int] THEN 99999
+            ELSE [b].[Int]
+        END < 99998 THEN CASE
+            WHEN 99999 < [b].[Int] THEN 99999
+            ELSE [b].[Int]
+        END
+        ELSE 99998
+    END
+    ELSE [b].[Short] + CAST(3 AS smallint)
+END = [b].[Int]
+""");
+    }
 
     public override async Task Degrees(bool async)
     {

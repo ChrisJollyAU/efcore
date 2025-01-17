@@ -561,13 +561,37 @@ public class SqlServerSqlTranslatingExpressionVisitor : RelationalSqlTranslating
         if (_sqlServerSingletonOptions.EngineType == SqlServerEngineType.SqlServer
             && _sqlServerSingletonOptions.SqlServerCompatibilityLevel < 160)
         {
-            return null;
+            if (expressions.Count == 0)
+            {
+                return null;
+            }
+
+            return expressions.Aggregate((current, next) =>
+                Dependencies.SqlExpressionFactory.Case(
+                    [
+                        new CaseWhenClause(
+                            Dependencies.SqlExpressionFactory.GreaterThan(current, next),
+                            current)
+                    ],
+                    elseResult: next));
         }
 
         if (_sqlServerSingletonOptions.EngineType == SqlServerEngineType.AzureSql
             && _sqlServerSingletonOptions.AzureSqlCompatibilityLevel < 160)
         {
-            return null;
+            if (expressions.Count == 0)
+            {
+                return null;
+            }
+
+            return expressions.Aggregate((current, next) =>
+                Dependencies.SqlExpressionFactory.Case(
+                    [
+                        new CaseWhenClause(
+                            Dependencies.SqlExpressionFactory.GreaterThan(current, next),
+                            current)
+                    ],
+                    elseResult: next));
         }
 
         var resultTypeMapping = ExpressionExtensions.InferTypeMapping(expressions);
@@ -590,13 +614,37 @@ public class SqlServerSqlTranslatingExpressionVisitor : RelationalSqlTranslating
         if (_sqlServerSingletonOptions.EngineType == SqlServerEngineType.SqlServer
             && _sqlServerSingletonOptions.SqlServerCompatibilityLevel < 160)
         {
-            return null;
+            if (expressions.Count == 0)
+            {
+                return null;
+            }
+
+            return expressions.Aggregate((current, next) =>
+                Dependencies.SqlExpressionFactory.Case(
+                    [
+                        new CaseWhenClause(
+                            Dependencies.SqlExpressionFactory.LessThan(current, next),
+                            current)
+                    ],
+                    elseResult: next));
         }
 
         if (_sqlServerSingletonOptions.EngineType == SqlServerEngineType.AzureSql
             && _sqlServerSingletonOptions.AzureSqlCompatibilityLevel < 160)
         {
-            return null;
+            if (expressions.Count == 0)
+            {
+                return null;
+            }
+
+            return expressions.Aggregate((current, next) =>
+                Dependencies.SqlExpressionFactory.Case(
+                    [
+                        new CaseWhenClause(
+                            Dependencies.SqlExpressionFactory.LessThan(current, next),
+                            current)
+                    ],
+                    elseResult: next));
         }
 
         var resultTypeMapping = ExpressionExtensions.InferTypeMapping(expressions);
